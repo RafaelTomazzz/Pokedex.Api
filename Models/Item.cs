@@ -16,6 +16,12 @@ namespace Pokedex.Api.Models
 
         [Required]
         [NotNull]
+        [Column("Nome")]
+        [StringLength(20)]
+        public string Nome { get; set;}
+
+        [Required]
+        [NotNull]
         [ForeignKey("IdTreinador")]
         public int IdTreinador { get; set;}
         [NotMapped]
@@ -43,7 +49,7 @@ namespace Pokedex.Api.Models
         public string Descricao { get; set;}
 
         [Column("Elemento")]
-        public Elemento Elemento { get; set;}
+        public Elemento? Elemento { get; set;}
     }
 
 }
