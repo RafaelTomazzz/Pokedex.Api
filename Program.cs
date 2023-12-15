@@ -1,5 +1,8 @@
 using Pokedex.Api.Data;
 using Microsoft.EntityFrameworkCore;
+using Pokedex.Api.Repositories;
+using Pokedex.Api.Repositories.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,19 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("LocalRafael"));
 });
+
+builder.Services.AddScoped<IEvolucoesRepository, EvolucoesRepository>();
+
+builder.Services.AddScoped<IHabilidadesRepository, HabilidadesRepository>();
+
+builder.Services.AddScoped<IItensRepository, ItensRepository>();
+
+builder.Services.AddScoped<IPokemonHabilidadesRepository, PokemonHabilidadesRepository>();
+
+builder.Services.AddScoped<IPokemonsRepository, PokemonsRepository>();
+
+builder.Services.AddScoped<ITreinadoresRepository, TreinadoresRepository>();
+
 
 var app = builder.Build();
 
