@@ -2,6 +2,8 @@ using Pokedex.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Pokedex.Api.Repositories;
 using Pokedex.Api.Repositories.Interfaces;
+using Pokedex.Api.Services.Interfaces;
+using Pokedex.Api.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,17 +21,22 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IEvolucoesRepository, EvolucoesRepository>();
+builder.Services.AddScoped<IEvolucoesService, EvolucoesServices>();
 
 builder.Services.AddScoped<IHabilidadesRepository, HabilidadesRepository>();
+builder.Services.AddScoped<IHabilidadesService, HabilidadesService>();
 
 builder.Services.AddScoped<IItensRepository, ItensRepository>();
+builder.Services.AddScoped<IItensService, ItensService>();
 
 builder.Services.AddScoped<IPokemonHabilidadesRepository, PokemonHabilidadesRepository>();
+builder.Services.AddScoped<IPokemonHabilidadesService, PokemonHabilidadesService>();
 
 builder.Services.AddScoped<IPokemonsRepository, PokemonsRepository>();
+builder.Services.AddScoped<IPokemonsService, PokemonsService>();
 
 builder.Services.AddScoped<ITreinadoresRepository, TreinadoresRepository>();
-
+builder.Services.AddScoped<ITreinadoresService, TreinadoresService>();
 
 var app = builder.Build();
 
