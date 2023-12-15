@@ -27,7 +27,13 @@ namespace Pokedex.Api.Models
         [NotNull]
         [Column("Peso_Pokemon")]
         [StringLength(3)]
-        public string Peso {get; set;}
+        public float Peso {get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Altura_Pokemon")]
+        [StringLength(3)]
+        public float Altura {get; set;}
 
         [Required]
         [NotNull]
@@ -50,6 +56,11 @@ namespace Pokedex.Api.Models
         [NotNull]
         [Column("Pontos_Defesa")]
         public int PtDefesa { get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Pontos_Velocidade")]
+        public int PtVelocidade { get; set;}
 
         [Required]
         [NotNull]
