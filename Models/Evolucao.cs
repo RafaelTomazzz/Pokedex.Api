@@ -10,28 +10,36 @@ namespace Pokedex.Api.Models
     [Table("Evolucao")]
     public class Evolucao
     {
+        public ICollection<EvolucaoHabilidade>? EvolucaoHabilidades {get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {get; set; }
 
         [Required]
-        [ForeignKey("Id_Pokemon")]
         [NotNull]
+        [ForeignKey("Id_Pokemon")]
         public int IdPokemon {get; set;}
         [NotMapped]
         public virtual Pokemon? Pokemon {get; set;}
 
         [Required]
         [NotNull]
-        [Column("Nome_Pokemon")]
+        [Column("Nome_Evolcucao")]
         [StringLength(20)]
         public string Nome {get; set;}
 
         [Required]
         [NotNull]
-        [Column("Peso_Pokemon")]
+        [Column("Peso_Evolucao")]
         [StringLength(3)]
-        public string Peso {get; set;}
+        public float Peso {get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Altura_Evolucao")]
+        [StringLength(3)]
+        public float Altura {get; set;}
 
         [Required]
         [NotNull]

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pokedex.Api.Data;
 
@@ -11,9 +12,11 @@ using Pokedex.Api.Data;
 namespace Pokedex.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231216133437_CorrecaoEvolucaoHabilidade")]
+    partial class CorrecaoEvolucaoHabilidade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +33,6 @@ namespace Pokedex.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<float>("Altura")
-                        .HasMaxLength(3)
-                        .HasColumnType("real")
-                        .HasColumnName("Altura_Evolucao");
-
                     b.Property<int>("Elemento")
                         .HasColumnType("int")
                         .HasColumnName("Elemento");
@@ -46,12 +44,13 @@ namespace Pokedex.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
-                        .HasColumnName("Nome_Evolcucao");
+                        .HasColumnName("Nome_Pokemon");
 
-                    b.Property<float>("Peso")
+                    b.Property<string>("Peso")
+                        .IsRequired()
                         .HasMaxLength(3)
-                        .HasColumnType("real")
-                        .HasColumnName("Peso_Evolucao");
+                        .HasColumnType("nvarchar(3)")
+                        .HasColumnName("Peso_Pokemon");
 
                     b.Property<int>("PtAtaque")
                         .HasColumnType("int")

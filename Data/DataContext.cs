@@ -54,6 +54,24 @@ namespace Pokedex.Api.Data
             modelBuilder.Entity<PokemonHabilidade>()
                 .HasKey(p => p.IdPokemon);
 
+            modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasOne(e => e.Evolucao)
+                .WithMany(p => p.EvolucaoHabilidades)
+                .HasForeignKey(e => e.IdEvolucao)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasOne(e => e.Evolucao)
+                .WithMany(p => p.EvolucaoHabilidades)
+                .HasForeignKey(e => e.IdHabilidade)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasKey(p => p.IdEvolucao);
+            
+            modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasKey(p => p.IdHabilidade);
+
             base.OnModelCreating(modelBuilder);
         }
     }
