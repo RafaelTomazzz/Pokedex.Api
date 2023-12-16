@@ -4,6 +4,8 @@ using Pokedex.Api.Repositories;
 using Pokedex.Api.Repositories.Interfaces;
 using Pokedex.Api.Services.Interfaces;
 using Pokedex.Api.Services;
+using Pokedex.Api.Repositories.UnitOfWork;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +39,8 @@ builder.Services.AddScoped<IPokemonsService, PokemonsService>();
 
 builder.Services.AddScoped<ITreinadoresRepository, TreinadoresRepository>();
 builder.Services.AddScoped<ITreinadoresService, TreinadoresService>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
