@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pokedex.Api.Data;
 
@@ -11,9 +12,11 @@ using Pokedex.Api.Data;
 namespace Pokedex.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231215173301_CorrecaoModelHabilidade")]
+    partial class CorrecaoModelHabilidade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,27 +85,23 @@ namespace Pokedex.Api.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasColumnName("Descricao");
 
-                    b.Property<int>("Elemento")
-                        .HasColumnType("int")
-                        .HasColumnName("Elemento");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)")
                         .HasColumnName("Nome_Habilidade");
 
-                    b.Property<int>("Power")
+                    b.Property<int>("PtAtaque")
                         .HasColumnType("int")
-                        .HasColumnName("Power");
+                        .HasColumnName("Pontos_Ataque");
 
-                    b.Property<int>("PtPower")
+                    b.Property<int>("PtDefesa")
                         .HasColumnType("int")
-                        .HasColumnName("Pontos_Power");
+                        .HasColumnName("Pontos_Defesa");
 
-                    b.Property<int>("PtPrecisao")
+                    b.Property<int>("PtVida")
                         .HasColumnType("int")
-                        .HasColumnName("Pontos_Precisao");
+                        .HasColumnName("Pontos_Vida");
 
                     b.HasKey("Id");
 

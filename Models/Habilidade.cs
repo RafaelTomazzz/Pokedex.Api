@@ -18,23 +18,31 @@ namespace Pokedex.Api.Models
 
         [Required]
         [NotNull]
+        [Column("Nome_Habilidade")]
+        [StringLength(40)]
+        public string Nome {get; set;}
+
+        [Required]
+        [NotNull]
         [Column("Descricao")]
         [StringLength(40)]
         public string Descricao {get; set;}
 
         [Required]
         [NotNull]
-        [Column("Pontos_Vida")]
-        public int PtVida {get; set;}
+        [Column("Elemento")]
+        public Elemento Elemento {get; set;}
+
+        [Column("Power")]
+        public int Power {get; set;}
+
+        [Column("Pontos_Precisao")]
+        public int PtPrecisao {get; set;}
 
         [Required]
         [NotNull]
-        [Column("Pontos_Defesa")]
-        public int PtDefesa {get; set;}
+        [Column("Pontos_Power")]
+        public int PtPower {get; set;}
         
-        [Required]
-        [NotNull]
-        [Column("Pontos_Ataque")]
-        public int PtAtaque {get; set;}
     }
 }
