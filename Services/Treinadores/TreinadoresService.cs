@@ -13,7 +13,7 @@ namespace Pokedex.Api.Services
         private readonly ITreinadoresRepository _treinadoresRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public TreinadoresService(ITreinadoresRepository treinadoresRepository, UnitOfWork unitOfWork)
+        public TreinadoresService(ITreinadoresRepository treinadoresRepository, IUnitOfWork unitOfWork)
         {
             _treinadoresRepository = treinadoresRepository;
             _unitOfWork = unitOfWork;

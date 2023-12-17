@@ -8,7 +8,7 @@ using Pokedex.Api.Services.Interfaces;
 namespace Pokedex.Api.Controllers
 {
     [ApiController]
-    [Route("Controller")]
+    [Route("[Controller]")]
     public class TreinadoresController : ControllerBase
     {
         private readonly ITreinadoresService _treinadoresService;
@@ -65,7 +65,7 @@ namespace Pokedex.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id,[FromBody] Treinador alteracaoTreinador)
         {
             try

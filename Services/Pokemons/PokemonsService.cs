@@ -2,17 +2,17 @@ using Pokedex.Api.Repositories;
 using Pokedex.Api.Services.Interfaces;
 using Pokedex.Api.Models;
 using Pokedex.Api.Exceptions;
-using System.Formats.Asn1;
 using Pokedex.Api.Repositories.UnitOfWork;
+using Pokedex.Api.Repositories.Interfaces;
 
 namespace Pokedex.Api.Services
 {
     public class PokemonsService : IPokemonsService
     {
-        private readonly PokemonsRepository _pokemonsRepository;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IPokemonsRepository _pokemonsRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PokemonsService(PokemonsRepository pokemonsRepository, UnitOfWork unitOfWork)
+        public PokemonsService(IPokemonsRepository pokemonsRepository, IUnitOfWork unitOfWork)
         {
             _pokemonsRepository = pokemonsRepository;
             _unitOfWork = unitOfWork;
