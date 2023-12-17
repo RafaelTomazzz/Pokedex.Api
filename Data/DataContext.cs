@@ -14,6 +14,7 @@ namespace Pokedex.Api.Data
         public DbSet<Item> Itens {get; set;}
         public DbSet<Habilidade> Habilidades {get; set;}
         public DbSet<PokemonHabilidade> PokemonHabilidades {get; set;}
+        public DbSet<EvolucaoHabilidade> EvolucaoHabilidades {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
