@@ -10,7 +10,7 @@ namespace Pokedex.Api.Data
 
         public DbSet<Pokemon> Pokemons {get; set;}
         public DbSet<Treinador> Treinadores {get; set;}
-        public DbSet<Evolucao> Evolucaos {get; set;}
+        public DbSet<Evolucao> Evolucoes {get; set;}
         public DbSet<Item> Itens {get; set;}
         public DbSet<Habilidade> Habilidades {get; set;}
         public DbSet<PokemonHabilidade> PokemonHabilidades {get; set;}

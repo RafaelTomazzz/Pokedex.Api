@@ -64,11 +64,11 @@ namespace Pokedex.Api.Controllers
         }
 
         [HttpDelete("{idevolucao}/{idhabilidade}")]
-        public async Task<IActionResult> DeleteAsync(int idevolucao, int idHabilidade)
+        public async Task<IActionResult> DeleteAsync(int idevolucao, int idhabilidade)
         {
             try
             {
-                await _evolucaoHabilidadeService.DeteleEHAsync(idevolucao, idHabilidade);
+                await _evolucaoHabilidadeService.DeteleEHAsync(idevolucao, idhabilidade);
                 return NoContent();
             }
             catch (BaseException ex)
