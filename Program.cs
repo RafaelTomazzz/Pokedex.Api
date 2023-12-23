@@ -29,6 +29,8 @@ builder.Services.AddScoped<IItensService, ItensService>();
 builder.Services.AddScoped<IPokemonHabilidadesRepository, PokemonHabilidadesRepository>();
 builder.Services.AddScoped<IPokemonHabilidadesService, PokemonHabilidadesService>();
 
+builder.Services.AddScoped<IEvolucaoHabilidadeRepository, EvolucaoHabilidadeRepository>();
+
 builder.Services.AddScoped<IPokemonsRepository, PokemonsRepository>();
 builder.Services.AddScoped<IPokemonsService, PokemonsService>();
 

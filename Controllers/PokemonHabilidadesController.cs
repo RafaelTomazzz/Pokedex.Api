@@ -63,7 +63,7 @@ namespace Pokedex.Api.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{idpokemon}/{idhabilidade}")]
         public async Task<IActionResult> DeleteAsync(int idpokemon, int idhabilidade)
         {
             try
