@@ -3,6 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Pokedex.Api.Models.Enuns;
+using Pokedex.Api.DTO;
+using Pokedex.Api.DTO.Builder;
 
 namespace Pokedex.Api.Models
 {
@@ -50,6 +52,53 @@ namespace Pokedex.Api.Models
 
         [Column("Elemento")]
         public Elemento? Elemento { get; set;}
+
+        public Item()
+        {}
+
+        public Item(string nome)
+        {
+            Nome = nome;
+        }
+        public Item(string nome, int ptVida)
+        {
+            Nome = nome;
+            PtVida = ptVida;
+        }
+        public Item(string nome, int ptVida, int ptDefesa)
+        {
+            Nome = nome;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+        }
+        public Item(string nome, int ptVida, int ptDefesa, int ptAtaque)
+        {
+            Nome = nome;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+        }
+        public Item(string nome, int ptVida, int ptDefesa, int ptAtaque, string descricao)
+        {
+            Nome = nome;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+            Descricao = descricao;
+        }
+
+        public ItemDTO ToItem()
+        {
+            ItemDTO itemDTO = new ItemDTOBuilder()
+                .WithNome(Nome)
+                .WithPtVida(PtVida)
+                .WithPtDefesa(PtDefesa)
+                .WithPtAtaque(PtAtaque)
+                .WithDescricao(Descricao)
+                .Build();
+            
+            return itemDTO;
+        }
     }
 
 }

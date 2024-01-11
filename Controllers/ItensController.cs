@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
+using Pokedex.Api.DTO;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Http;
 using Pokedex.Api.Models;
@@ -26,7 +27,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 IEnumerable<Item> itens = await _itensService.GetAllItensAsync();
-                return Ok(itens);
+                IEnumerable<ItemDTO> itensDTO = itens.Select(i => i.ToItem());
+                return Ok(itensDTO);
             }
             catch (BaseException ex)
             {
@@ -41,7 +43,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 Item item = await _itensService.GetByIdItemAsync(id);
-                return Ok(item);
+                ItemDTO itemDTO = item.ToItem();
+                return Ok(itemDTO);
             }
             catch (BaseException ex)
             {
