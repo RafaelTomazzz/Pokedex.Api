@@ -18,7 +18,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IEvolucoesRepository, EvolucoesRepository>();
-builder.Services.AddScoped<IEvolucoesService, EvolucoesServices>();
+builder.Services.AddScoped<IEvolucoesService, EvolucoesService>();
 
 builder.Services.AddScoped<IHabilidadesRepository, HabilidadesRepository>();
 builder.Services.AddScoped<IHabilidadesService, HabilidadesService>();

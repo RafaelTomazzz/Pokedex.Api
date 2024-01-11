@@ -3,6 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Pokedex.Api.Models.Enuns;
+using Pokedex.Api.DTO.Builder;
+using Pokedex.Api.DTO;
 
 namespace Pokedex.Api.Models
 {
@@ -66,5 +68,90 @@ namespace Pokedex.Api.Models
         [NotNull]
         [Column("Elemento")]
         public Elemento Elemento { get; set;}
+
+        public Pokemon()
+        {}
+
+        public Pokemon(string nome)
+        {
+            Nome = nome;
+        }
+
+        public Pokemon(string nome, float peso)
+        {
+            Nome = nome;
+            Peso = peso;
+        }
+        
+        public Pokemon(string nome, float peso, float altura)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int ptVida)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+        }
+        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+        }
+        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+        }
+        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque, int ptVelocidade)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+            PtVelocidade = ptVelocidade;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque, int ptVelocidade, Elemento elemento)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+            PtVelocidade = ptVelocidade;
+            Elemento = elemento;
+        }
+
+        public PokemonDTO ToPokemon()
+        {
+            PokemonDTO pokemonDTO = new PokemonDTOBuilder()
+                .WithNome(Nome)
+                .WithPeso(Peso)
+                .WithAltura(Altura)
+                .WithPtVida(PtVida)
+                .WithPtDefesa(PtDefesa)
+                .WithPtAtaque(PtAtaque)
+                .WithPtVelocidade(PtVelocidade)
+                .WithElemento(Elemento)
+                .Builder();
+
+                return pokemonDTO;
+
+        }
     }
 }
