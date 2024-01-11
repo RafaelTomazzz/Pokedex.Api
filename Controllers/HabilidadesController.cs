@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Pokedex.Api.DTO;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Http;
 using Pokedex.Api.Models;
@@ -23,7 +24,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 IEnumerable<Habilidade> habilidades = await _habilidadesService.GetAllHabilidadeAsync();
-                return Ok(habilidades);                
+                IEnumerable<HabilidadeDTO> habilidadesDTO = habilidades.Select(h => h.ToHabilidade());
+                return Ok(habilidadesDTO);                
             }
             catch (BaseException ex)
             {
@@ -38,7 +40,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 Habilidade habilidade = await _habilidadesService.GetByIdHabilidadeAsync(id);
-                return Ok(habilidade);
+                HabilidadeDTO habilidadeDTO = habilidade.ToHabilidade();
+                return Ok(habilidadeDTO);
             }
             catch (BaseException ex)
             {

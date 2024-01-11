@@ -3,6 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Pokedex.Api.Models.Enuns;
+using Pokedex.Api.DTO;
+using Pokedex.Api.DTO.Builder;
 
 namespace Pokedex.Api.Models
 {
@@ -45,6 +47,66 @@ namespace Pokedex.Api.Models
         [NotNull]
         [Column("Pontos_Power")]
         public int PtPower {get; set;}
-        
+
+        public Habilidade()
+        {}
+
+        public Habilidade(string nome)
+        {
+            Nome = nome;
+        }
+
+        public Habilidade(string nome, string descricao)
+        {
+            Nome = nome;
+            Descricao = descricao;
+        }
+
+        public Habilidade(string nome, string descricao, Elemento elemento)
+        {
+            Nome = nome;
+            Descricao = descricao;
+            Elemento = elemento;
+        }
+
+        public Habilidade(string nome, string descricao, Elemento elemento, int power)
+        {
+            Nome = nome;
+            Descricao = descricao;
+            Elemento = elemento;
+            Power = power;
+        }
+        public Habilidade(string nome, string descricao, Elemento elemento, int power, int ptPrecisao)
+        {
+            Nome = nome;
+            Descricao = descricao;
+            Elemento = elemento;
+            Power = power;
+            PtPrecisao = ptPrecisao;
+        }
+        public Habilidade(string nome, string descricao, Elemento elemento, int power, int ptPrecisao, int ptPower)
+        {
+            Nome = nome;
+            Descricao = descricao;
+            Elemento = elemento;
+            Power = power;
+            PtPrecisao = ptPrecisao;
+            PtPower = ptPower;
+        }
+
+        public HabilidadeDTO ToHabilidade()
+        {
+            HabilidadeDTO habilidadeDTO = new HabilidadeDTOBuilder()
+                .WithNome(Nome)
+                .WithDescricao(Descricao)
+                .WithElemento(Elemento)
+                .WithPower(Power)
+                .WithPtPrecisao(PtPrecisao)
+                .WithPtPower(PtPower)
+                .Build();
+
+            return habilidadeDTO;
+        }
+
     }
 }
