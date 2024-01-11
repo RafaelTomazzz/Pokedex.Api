@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Pokedex.Api.DTO;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Http;
 using Pokedex.Api.Models;
@@ -24,7 +25,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 IEnumerable<Treinador> treinadores = await _treinadoresService.GetAllTreinadorAsync();
-                return Ok(treinadores);
+                IEnumerable<TreinadorDTO> treinadoresDTO = treinadores.Select(t => t.ToTreinador());
+                return Ok(treinadoresDTO);
             }
             catch (BaseException ex)
             {
@@ -33,14 +35,15 @@ namespace Pokedex.Api.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
 
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             try
             {
                 Treinador treinador = await _treinadoresService.GetByIdTreinadorAsync(id);
-                return Ok(treinador);
+                TreinadorDTO treinadorDTO = treinador.ToTreinador();
+                return Ok(treinadorDTO);
             }
             catch (BaseException ex)
             {

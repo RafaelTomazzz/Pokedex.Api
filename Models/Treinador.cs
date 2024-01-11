@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Pokedex.Api.DTO;
+using Pokedex.Api.DTO.Builder;
 
 namespace Pokedex.Api.Models
 {
@@ -44,5 +46,40 @@ namespace Pokedex.Api.Models
         [Column("Senha")]
         [StringLength(15)]
         public string Senha {get; set; }
+
+        public Treinador()
+        {}
+
+        public Treinador(string pnome)
+        {
+            PNome = pnome;
+        }
+
+        public Treinador(string pnome, string snome)
+        {
+            PNome = pnome;
+            SNome = snome;
+        }
+        public Treinador(string pnome, string snome, string login)
+        {
+            PNome = pnome;
+            SNome = snome;
+            Login = login;
+        }
+
+        public TreinadorDTO ToTreinador()
+        {
+            TreinadorDTO treinadorDTO = new TreinadorDTOBuilder()
+                .WithPNome(PNome)
+                .WithSNome(SNome)
+                .WithLogin(Login)
+                .Build();
+
+            return treinadorDTO;
+        }
+
+
+
+
     }
 }

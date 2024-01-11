@@ -1,0 +1,4 @@
+namespace Pokedex.Api.DTO
+{
+    
+}
