@@ -3,6 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Pokedex.Api.Models.Enuns;
+using Pokedex.Api.DTO;
+using Pokedex.Api.DTO.Builder;
 
 namespace Pokedex.Api.Models
 {
@@ -55,10 +57,84 @@ namespace Pokedex.Api.Models
         [NotNull]
         [Column("Pontos_Defesa")]
         public int PtDefesa { get; set;}
+        
+        [Required]
+        [NotNull]
+        [Column("Pontos_Velocidade")]
+        public int PtVelocidade { get; set;}
 
         [Required]
         [NotNull]
         [Column("Elemento")]
         public Elemento Elemento { get; set;}
+
+        public Evolucao()
+        {}
+        public Evolucao(string nome)
+        {
+            Nome = nome;
+        }
+        public Evolucao(string nome, float peso)
+        {
+            Nome = nome;
+            Peso = peso;
+        }
+        public Evolucao(string nome, float peso, float altura)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+        }
+        public Evolucao(string nome, float peso, float altura, int ptVida)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+        }
+        public Evolucao(string nome, float peso, float altura, int ptVida, int ptDefesa)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+        }
+        public Evolucao(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+        }
+        public Evolucao(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque, int ptVelocidade)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            PtVida = ptVida;
+            PtDefesa = ptDefesa;
+            PtAtaque = ptAtaque;
+            PtVelocidade = ptVelocidade;
+        }
+
+        public EvolucaoDTO ToEvolucao()
+        {
+            EvolucaoDTO evolucaoDTO = new EvolucaoDTOBuilder()
+                .WithNome(Nome)
+                .WithPeso(Peso)
+                .WithAltura(Altura)
+                .WithPtVida(PtVida)
+                .WithPtAtaque(PtDefesa)
+                .WithPtAtaque(PtAtaque)
+                .WithPtVelocidade(PtVelocidade)
+                .Build();
+
+            return evolucaoDTO;
+        }
+
+
     }
 }

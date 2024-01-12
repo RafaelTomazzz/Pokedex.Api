@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Pokedex.Api.DTO;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Http;
 using Pokedex.Api.Models;
@@ -23,7 +24,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 IEnumerable<Evolucao> evolucoes = await _evolucoesService.GetAllEvolucaoAsync();
-                return Ok(evolucoes);
+                IEnumerable<EvolucaoDTO> evolucoesDTO = evolucoes.Select(e => e.ToEvolucao());
+                return Ok(evolucoesDTO);
             }
             catch (BaseException ex)
             {
@@ -38,7 +40,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 Evolucao evolucao = await _evolucoesService.GetByIdAsync(id);
-                return Ok(evolucao);
+                EvolucaoDTO evolucaoDTO = evolucao.ToEvolucao();
+                return Ok(evolucaoDTO);
             }
             catch (BaseException ex)
             {
