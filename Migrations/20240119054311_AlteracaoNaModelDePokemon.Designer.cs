@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pokedex.Api.Data;
 
@@ -11,9 +12,11 @@ using Pokedex.Api.Data;
 namespace Pokedex.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240119054311_AlteracaoNaModelDePokemon")]
+    partial class AlteracaoNaModelDePokemon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,6 +193,7 @@ namespace Pokedex.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<float>("Altura")
+                        .HasMaxLength(3)
                         .HasColumnType("real")
                         .HasColumnName("Altura_Pokemon");
 
@@ -204,8 +208,8 @@ namespace Pokedex.Api.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)")
                         .HasColumnName("Descricao");
 
                     b.Property<int>("Elemento")
@@ -262,6 +266,7 @@ namespace Pokedex.Api.Migrations
                         .HasColumnName("Nome_Pokemon");
 
                     b.Property<float>("Peso")
+                        .HasMaxLength(3)
                         .HasColumnType("real")
                         .HasColumnName("Peso_Pokemon");
 

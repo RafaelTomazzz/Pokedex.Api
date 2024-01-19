@@ -44,17 +44,21 @@ namespace Pokedex.Api.Services
 
         public async Task<Pokemon> PostPokemonAsync(Pokemon pokemon)
         {
-            if(pokemon.PtVida > 250)
+            if(pokemon.MinVida <= 10 | pokemon.MinVida <= 0)
             {
-                throw new Exception("O HP do pokemon não pode ser maior que 250");
+                throw new Exception("O HP do pokemon não pode ser menor ou igual que 10");
             }
-            else if(pokemon.PtDefesa > 230)
+            else if(pokemon.MinDefesa <= 10 | pokemon.MinDefesa <= 10)
             {
-                throw new Exception("A defesa do pokemon não pode ser maior que 230");
+                throw new Exception("A defesa do pokemon não pode ser menor ou igual que 10");
             }
-            else if(pokemon.PtAtaque > 170)
+            else if(pokemon.MinAtaque <= 10 | pokemon.MinAtaque <= 10)
             {
-                throw new Exception("O ataque do pokemon não pode ser maior que 170");
+                throw new Exception("O ataque do pokemon não pode ser menor ou igual que 10");
+            }
+            else if(pokemon.MinVelocidade <= 10 | pokemon.MinVelocidade <= 10)
+            {
+                throw new Exception("A velocidade do pokemon não pode ser menor ou igual que 10");
             }
 
             await _pokemonsRepository.PostPokemonAsync(pokemon);
@@ -74,11 +78,16 @@ namespace Pokedex.Api.Services
             pokemon.Nome = alteracaoPokemon.Nome;
             pokemon.Peso = alteracaoPokemon.Peso;
             pokemon.Altura = alteracaoPokemon.Altura;
-            pokemon.PtVida = alteracaoPokemon.PtVida;
-            pokemon.PtDefesa = alteracaoPokemon.PtDefesa;
-            pokemon.PtAtaque = alteracaoPokemon.PtAtaque;
-            pokemon.PtVelocidade = alteracaoPokemon.PtVelocidade;
+            pokemon.MinVida = alteracaoPokemon.MinVida;
+            pokemon.MaxVida= alteracaoPokemon.MaxVida;
+            pokemon.MinAtaque = alteracaoPokemon.MinAtaque;
+            pokemon.MaxAtaque = alteracaoPokemon.MaxAtaque;
+            pokemon.MinDefesa = alteracaoPokemon.MinDefesa;
+            pokemon.MaxDefesa = alteracaoPokemon.MaxDefesa;
+            pokemon.MinVelocidade = alteracaoPokemon.MinVelocidade;
+            pokemon.MaxVelocidade = alteracaoPokemon.MaxVelocidade;
             pokemon.Elemento = alteracaoPokemon.Elemento;
+            pokemon.SegundoElemento = alteracaoPokemon.SegundoElemento;
             await _unitOfWork.SaveChangesAsync();
 
             return alteracaoPokemon;

@@ -28,14 +28,17 @@ namespace Pokedex.Api.Models
         [Required]
         [NotNull]
         [Column("Peso_Pokemon")]
-        [StringLength(3)]
         public float Peso {get; set;}
 
         [Required]
         [NotNull]
         [Column("Altura_Pokemon")]
-        [StringLength(3)]
         public float Altura {get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Codigo")]
+        public string Codigo { get; set;}
 
         [Required]
         [NotNull]
@@ -46,28 +49,73 @@ namespace Pokedex.Api.Models
 
         [Required]
         [NotNull]
-        [Column("Pontos_Vida")]
-        public int PtVida { get; set;}
+        [Column("Min_Vida")]
+        [Comment("Status base da vida")]
+        public int MinVida { get; set;}
 
         [Required]
         [NotNull]
-        [Column("Pontos_Ataque")]
-        public int PtAtaque { get; set;}
+        [Column("Max_Vida")]
+        [Comment("Status maximo da vida")]
+        public int MaxVida { get; set;}
 
         [Required]
         [NotNull]
-        [Column("Pontos_Defesa")]
-        public int PtDefesa { get; set;}
+        [Column("Min_Ataque")]
+        [Comment("Status base do ataque")]
+        public int MinAtaque { get; set;}
+        
+        [Required]
+        [NotNull]
+        [Column("Max_Ataque")]
+        [Comment("Status maximo do ataque")]
+        public int MaxAtaque { get; set;}
 
         [Required]
         [NotNull]
-        [Column("Pontos_Velocidade")]
-        public int PtVelocidade { get; set;}
+        [Column("Min_Defesa")]
+        [Comment("Status base da defesa")]
+        public int MinDefesa { get; set;}
+        
+        [Required]
+        [NotNull]
+        [Column("Max_Defesa")]
+        [Comment("Status maximo da defesa")]
+        public int MaxDefesa { get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Min_Velocidade")]
+        [Comment("status base da velocidade")]
+        public int MinVelocidade { get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Max_Velocidade")]
+        [Comment("status maximo da velocidade")]
+        public int MaxVelocidade { get; set;}
 
         [Required]
         [NotNull]
         [Column("Elemento")]
         public Elemento Elemento { get; set;}
+
+        [Column("SegundoElemento")]
+        public SegundoElemento SegundoElemento { get; set;} = SegundoElemento.Nenhum;
+
+        [Required]
+        [NotNull]
+        [Column("Apanhado")]
+        public bool Apanhado { get; set;} = false;
+
+        [Required]
+        [NotNull]
+        [Column("Descricao")]
+        [StringLength(250)]
+        public string Descricao { get; set;}
+
+
+
 
         public Pokemon()
         {}
@@ -90,52 +138,151 @@ namespace Pokedex.Api.Models
             Altura = altura;
         }
 
-        public Pokemon(string nome, float peso, float altura, int ptVida)
+        public Pokemon(string nome, float peso, float altura, int minVida)
         {
             Nome = nome;
             Peso = peso;
             Altura = altura;
-            PtVida = ptVida;
-        }
-        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa)
-        {
-            Nome = nome;
-            Peso = peso;
-            Altura = altura;
-            PtVida = ptVida;
-            PtDefesa = ptDefesa;
-        }
-        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque)
-        {
-            Nome = nome;
-            Peso = peso;
-            Altura = altura;
-            PtVida = ptVida;
-            PtDefesa = ptDefesa;
-            PtAtaque = ptAtaque;
-        }
-        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque, int ptVelocidade)
-        {
-            Nome = nome;
-            Peso = peso;
-            Altura = altura;
-            PtVida = ptVida;
-            PtDefesa = ptDefesa;
-            PtAtaque = ptAtaque;
-            PtVelocidade = ptVelocidade;
+            MinVida = minVida;
         }
 
-        public Pokemon(string nome, float peso, float altura, int ptVida, int ptDefesa, int ptAtaque, int ptVelocidade, Elemento elemento)
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida)
         {
             Nome = nome;
             Peso = peso;
             Altura = altura;
-            PtVida = ptVida;
-            PtDefesa = ptDefesa;
-            PtAtaque = ptAtaque;
-            PtVelocidade = ptVelocidade;
+            MinVida = minVida;
+            MaxVida = maxVida;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+            MaxVelocidade = maxVelocidade;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+            MaxVelocidade = maxVelocidade;
             Elemento = elemento;
         }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+            MaxVelocidade = maxVelocidade;
+            Elemento = elemento;
+            SegundoElemento = segundoElemento;
+        }
+
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+            MaxVelocidade = maxVelocidade;
+            Elemento = elemento;
+            SegundoElemento = segundoElemento;
+            Codigo = codigo;
+        }
+
+        
+        
 
         public PokemonDTO ToPokemon()
         {
@@ -143,11 +290,17 @@ namespace Pokedex.Api.Models
                 .WithNome(Nome)
                 .WithPeso(Peso)
                 .WithAltura(Altura)
-                .WithPtVida(PtVida)
-                .WithPtDefesa(PtDefesa)
-                .WithPtAtaque(PtAtaque)
-                .WithPtVelocidade(PtVelocidade)
+                .WithMinVida(MinVida)
+                .WithMaxVida(MaxVida)
+                .WithMinAtaque(MinAtaque)
+                .WithMaxAtaque(MaxAtaque)
+                .WithMinDefesa(MinDefesa)
+                .WithMaxDefesa(MaxDefesa)
+                .WithMinVelocidade(MinVelocidade)
+                .WithMaxVelocidade(MaxVelocidade)
                 .WithElemento(Elemento)
+                .WithSegundoElemento(SegundoElemento)
+                .WithCogido(Codigo)
                 .Builder();
 
             return pokemonDTO;

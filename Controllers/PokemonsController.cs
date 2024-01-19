@@ -35,6 +35,23 @@ namespace Pokedex.Api.Controllers
             }
         }
 
+        [HttpGet("GetAllSemDTO")]
+        public async Task<IActionResult> GetAllAsyncSemDTO()
+        {
+            try
+            {
+                IEnumerable<Pokemon> pokemons = await _pokemonsService.GetAllPokemonAsync();
+                IEnumerable<PokemonDTO> pokemonsDTO = pokemons.Select(p => p.ToPokemon());
+                return Ok(pokemons);   
+            }
+            catch (BaseException ex)
+            {
+                
+                return ex.GetResponse();
+            }
+        }
+
+
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {

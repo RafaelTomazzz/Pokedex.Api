@@ -24,27 +24,50 @@ namespace Pokedex.Api.DTO.Builder
             return this;
         }
 
-        public PokemonDTOBuilder WithPtVida(int ptVida)
+        public PokemonDTOBuilder WithMinVida(int minVida)
         {
-            _pokemonDTO.PtVida = ptVida;
+            _pokemonDTO.MinVida = minVida;
             return this;
         }
 
-        public PokemonDTOBuilder WithPtDefesa(int ptDefesa)
+        public PokemonDTOBuilder WithMaxVida(int maxVida)
         {
-            _pokemonDTO.PtDefesa = ptDefesa;
+            _pokemonDTO.MaxVida = maxVida;
             return this;
         }
 
-        public PokemonDTOBuilder WithPtAtaque(int ptAtaque)
+        public PokemonDTOBuilder WithMinDefesa(int minDefesa)
         {
-            _pokemonDTO.PtAtaque = ptAtaque;
+            _pokemonDTO.MinDefesa = minDefesa;
+            return this;
+        }
+        public PokemonDTOBuilder WithMaxDefesa(int maxDefesa)
+        {
+            _pokemonDTO.MaxDefesa = maxDefesa;
             return this;
         }
 
-        public PokemonDTOBuilder WithPtVelocidade(int ptVelocidade)
+        public PokemonDTOBuilder WithMinAtaque(int minAtaque)
         {
-            _pokemonDTO.PtVelocidade = ptVelocidade;
+            _pokemonDTO.MinAtaque = minAtaque;
+            return this;
+        }
+
+        public PokemonDTOBuilder WithMaxAtaque(int maxAtaque)
+        {
+            _pokemonDTO.MaxAtaque = maxAtaque;
+            return this;
+        }
+
+        public PokemonDTOBuilder WithMinVelocidade(int minVelocidade)
+        {
+            _pokemonDTO.MinVelocidade = minVelocidade;
+            return this;
+        }
+
+        public PokemonDTOBuilder WithMaxVelocidade(int maxVelocidade)
+        {
+            _pokemonDTO.MaxVelocidade = maxVelocidade;
             return this;
         }
 
@@ -54,6 +77,18 @@ namespace Pokedex.Api.DTO.Builder
             return this;
         }
 
+        public PokemonDTOBuilder WithSegundoElemento(SegundoElemento segundoElemento)
+        {
+            _pokemonDTO.SegundoElemento = segundoElemento;
+            return this;
+        }
+
+        public PokemonDTOBuilder WithCogido(string codigo)
+        {
+            _pokemonDTO.Codigo = codigo;
+            return this;
+        }
+        
         public PokemonDTO Builder()
         {
             return _pokemonDTO;

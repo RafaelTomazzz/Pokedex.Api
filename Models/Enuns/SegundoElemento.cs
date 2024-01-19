@@ -1,12 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Pokedex.Api.Models.Enuns 
+namespace Pokedex.Api.Models.Enuns
 {
-    public enum Elemento
+    public enum SegundoElemento
     {
+        Nenhum = 0,
         Normal = 1,
         Fogo = 2,
         Agua = 3,
@@ -25,5 +21,5 @@ namespace Pokedex.Api.Models.Enuns
         Dragao = 16,
         Sombrio = 17,
         Fada = 18,
-    }
+    } 
 }
