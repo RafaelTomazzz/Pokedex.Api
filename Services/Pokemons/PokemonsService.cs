@@ -88,6 +88,9 @@ namespace Pokedex.Api.Services
             pokemon.MaxVelocidade = alteracaoPokemon.MaxVelocidade;
             pokemon.Elemento = alteracaoPokemon.Elemento;
             pokemon.SegundoElemento = alteracaoPokemon.SegundoElemento;
+            pokemon.Descricao = alteracaoPokemon.Descricao;
+            pokemon.Codigo = alteracaoPokemon.Codigo;
+            pokemon.Apanhado = alteracaoPokemon.Apanhado;
             await _unitOfWork.SaveChangesAsync();
 
             return alteracaoPokemon;

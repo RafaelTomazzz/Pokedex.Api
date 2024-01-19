@@ -7,10 +7,18 @@ namespace Pokedex.Api.DTO
         public string Nome {get; set;}
         public float Peso {get; set;}
         public float Altura {get; set;}
-        public int PtVida { get; set;}
-        public int PtAtaque { get; set;}
-        public int PtDefesa { get; set;}
-        public int PtVelocidade { get; set;}
+        public int MinVida { get; set;}
+        public int MaxVida { get; set;}
+        public int MinAtaque { get; set;}
+        public int MaxAtaque { get; set;}
+        public int MinDefesa { get; set;}
+        public int MaxDefesa { get; set;}
+        public int MinVelocidade { get; set;}
+        public int MaxVelocidade { get; set;}
         public Elemento Elemento { get; set;}
+        public SegundoElemento? SegundoElemento { get; set;}
+        public string Codigo { get; set;}
+        public bool Apanhado { get; set;}
+        public string Descricao { get; set;}
     }
 }

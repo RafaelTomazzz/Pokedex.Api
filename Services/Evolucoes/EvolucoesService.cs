@@ -46,17 +46,17 @@ namespace Pokedex.Api.Services
         {
             Evolucao evolucao = await _evolucaoRepository.GetByNomeEvolucaoAsync(novaEvolucao.Nome);
 
-            if(novaEvolucao.PtVida > 250)
+            if(novaEvolucao.MinVida <= 10 | novaEvolucao.MaxVida <= 10)
             {
-                throw new Exception("O HP do pokemon não pode ser maior que 250");
+                throw new Exception("O HP do pokemon não pode ser menor ou igual a 10");
             }
-            else if(novaEvolucao.PtDefesa > 230)
+            else if(novaEvolucao.MinAtaque <= 10 | novaEvolucao.MaxAtaque <= 10 )
             {
-                throw new Exception("A defesa do pokemon não pode ser maior que 230");
+                throw new Exception("O ataque do pokemon não pode ser menor ou igual a 10");
             }
-            else if(novaEvolucao.PtAtaque > 170)
+            else if(novaEvolucao.MinDefesa <= 10 | novaEvolucao.MaxDefesa <= 10)
             {
-                throw new Exception("O ataque do pokemon não pode ser maior que 170");
+                throw new Exception("A defesa do pokemon não pode ser menor que 10");
             }
 
             await _evolucaoRepository.PostEvolucaoAsync(novaEvolucao);
@@ -77,9 +77,17 @@ namespace Pokedex.Api.Services
             evolucao.Elemento = alteracaoEvolucao.Elemento;
             evolucao.Peso = alteracaoEvolucao.Peso;
             evolucao.Altura = alteracaoEvolucao.Altura;
-            evolucao.PtVida = alteracaoEvolucao.PtVida;
-            evolucao.PtDefesa = alteracaoEvolucao.PtDefesa;
-            evolucao.PtAtaque = alteracaoEvolucao.PtAtaque;
+            evolucao.MinVida = alteracaoEvolucao.MinVida;
+            evolucao.MaxVida = alteracaoEvolucao.MaxVida;
+            evolucao.MinAtaque = alteracaoEvolucao.MinAtaque;
+            evolucao.MaxAtaque = alteracaoEvolucao.MaxAtaque;
+            evolucao.MinDefesa = alteracaoEvolucao.MinDefesa;
+            evolucao.MaxDefesa = alteracaoEvolucao.MaxDefesa;
+            evolucao.MinVelocidade = alteracaoEvolucao.MinVelocidade;
+            evolucao.MaxVelocidade = alteracaoEvolucao.MaxVelocidade;
+            evolucao.Apanhado = alteracaoEvolucao.Apanhado;
+            evolucao.Codigo = alteracaoEvolucao.Codigo;
+            evolucao.Descricao = alteracaoEvolucao.Descricao;
             await _unitOfWork.SaveChangesAsync();
 
             return evolucao;
