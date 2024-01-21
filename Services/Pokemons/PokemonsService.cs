@@ -91,6 +91,7 @@ namespace Pokedex.Api.Services
             pokemon.Descricao = alteracaoPokemon.Descricao;
             pokemon.Codigo = alteracaoPokemon.Codigo;
             pokemon.Apanhado = alteracaoPokemon.Apanhado;
+            pokemon.Imagem = alteracaoPokemon.Imagem;
             await _unitOfWork.SaveChangesAsync();
 
             return alteracaoPokemon;

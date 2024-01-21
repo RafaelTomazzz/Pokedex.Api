@@ -18,6 +18,8 @@ namespace Pokedex.Api.DTO
         public Elemento Elemento { get; set;}
         public SegundoElemento? SegundoElemento { get; set;}
         public string Codigo { get; set;}
+        public string Imagem { get; set;}
+
 
     }
 }

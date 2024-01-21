@@ -114,6 +114,11 @@ namespace Pokedex.Api.Models
         [Column("Descricao")]
         [StringLength(250)]
         public string Descricao { get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Imagem")]
+        public string Imagem { get; set;}
         
         
         
@@ -320,6 +325,27 @@ namespace Pokedex.Api.Models
             Apanhado = apanhado;
         }
 
+        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo, string descricao, bool apanhado, string imagem)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+            MaxVelocidade = maxVelocidade;
+            Elemento = elemento;
+            SegundoElemento = segundoElemento;
+            Codigo = codigo;
+            Descricao = descricao;
+            Apanhado = apanhado;
+            Imagem = imagem;
+        }
+
         public EvolucaoDTO ToEvolucao()
         {
             EvolucaoDTO evolucaoDTO = new EvolucaoDTOBuilder()
@@ -339,6 +365,7 @@ namespace Pokedex.Api.Models
                 .WithSegundoElemento(SegundoElemento)
                 .WithDescricao(Descricao)
                 .WithApanhado(Apanhado)
+                .WithImagem(Imagem)
                 .Build();
 
             return evolucaoDTO;

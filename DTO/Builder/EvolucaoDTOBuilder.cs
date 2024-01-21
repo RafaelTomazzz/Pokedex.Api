@@ -98,6 +98,12 @@ namespace Pokedex.Api.DTO.Builder
             return this;
         }
 
+        public EvolucaoDTOBuilder WithImagem(string imagem)
+        {
+            _evolucaoDTO.Imagem = imagem;
+            return this;
+        }
+
         public EvolucaoDTO Build()
         {
             return _evolucaoDTO;

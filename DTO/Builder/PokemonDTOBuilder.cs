@@ -88,6 +88,12 @@ namespace Pokedex.Api.DTO.Builder
             _pokemonDTO.Codigo = codigo;
             return this;
         }
+
+        public PokemonDTOBuilder WithImagem(string imagem)
+        {
+            _pokemonDTO.Imagem = imagem;
+            return this;
+        }
         
         public PokemonDTO Builder()
         {

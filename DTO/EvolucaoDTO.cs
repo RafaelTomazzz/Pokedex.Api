@@ -20,5 +20,7 @@ namespace Pokedex.Api.DTO
         public string Codigo { get; set;}
         public bool Apanhado { get; set;}
         public string Descricao { get; set;}
+        public string Imagem { get; set;}
+
     }
 }

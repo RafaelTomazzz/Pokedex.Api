@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using Pokedex.Api.Models.Enuns;
 using Pokedex.Api.DTO.Builder;
 using Pokedex.Api.DTO;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Pokedex.Api.Models
 {
@@ -113,6 +114,11 @@ namespace Pokedex.Api.Models
         [Column("Descricao")]
         [StringLength(250)]
         public string Descricao { get; set;}
+
+        [Required]
+        [NotNull]
+        [Column("Imagem")]
+        public string Imagem { get; set;}
 
 
 
@@ -281,6 +287,26 @@ namespace Pokedex.Api.Models
             Codigo = codigo;
         }
 
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo, string imagem)
+        {
+            Nome = nome;
+            Peso = peso;
+            Altura = altura;
+            MinVida = minVida;
+            MaxVida = maxVida;
+            MinAtaque = minAtaque;
+            MaxAtaque = maxAtaque;
+            MinDefesa = minDefesa;
+            MaxDefesa = maxDefesa;
+            MinVelocidade = minVelocidade;
+            MaxVelocidade = maxVelocidade;
+            Elemento = elemento;
+            SegundoElemento = segundoElemento;
+            Codigo = codigo;
+            Imagem = imagem;
+        }
+
+
         
         
 
@@ -301,6 +327,7 @@ namespace Pokedex.Api.Models
                 .WithElemento(Elemento)
                 .WithSegundoElemento(SegundoElemento)
                 .WithCogido(Codigo)
+                .WithImagem(Imagem)
                 .Builder();
 
             return pokemonDTO;
