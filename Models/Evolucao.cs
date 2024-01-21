@@ -46,7 +46,7 @@ namespace Pokedex.Api.Models
         [Required]
         [NotNull]
         [Column("Codigo")]
-        public string Codigo { get; set;}
+        public int Codigo { get; set;}
 
         [Required]
         [NotNull]
@@ -268,7 +268,7 @@ namespace Pokedex.Api.Models
             SegundoElemento = segundoElemento;
         }
 
-        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo)
+        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo)
         {
             Nome = nome;
             Peso = peso;
@@ -286,7 +286,7 @@ namespace Pokedex.Api.Models
             Codigo = codigo;
         }
 
-        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo, string descricao)
+        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string descricao)
         {
             Nome = nome;
             Peso = peso;
@@ -305,7 +305,7 @@ namespace Pokedex.Api.Models
             Descricao = descricao;
         }
 
-        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo, string descricao, bool apanhado)
+        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string descricao, bool apanhado)
         {
             Nome = nome;
             Peso = peso;
@@ -325,7 +325,7 @@ namespace Pokedex.Api.Models
             Apanhado = apanhado;
         }
 
-        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo, string descricao, bool apanhado, string imagem)
+        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string descricao, bool apanhado, string imagem)
         {
             Nome = nome;
             Peso = peso;

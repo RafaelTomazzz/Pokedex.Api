@@ -83,7 +83,7 @@ namespace Pokedex.Api.DTO.Builder
             return this;
         }
 
-        public PokemonDTOBuilder WithCogido(string codigo)
+        public PokemonDTOBuilder WithCogido(int codigo)
         {
             _pokemonDTO.Codigo = codigo;
             return this;

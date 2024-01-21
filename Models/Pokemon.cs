@@ -39,7 +39,7 @@ namespace Pokedex.Api.Models
         [Required]
         [NotNull]
         [Column("Codigo")]
-        public string Codigo { get; set;}
+        public int Codigo { get; set;}
 
         [Required]
         [NotNull]
@@ -269,7 +269,7 @@ namespace Pokedex.Api.Models
             SegundoElemento = segundoElemento;
         }
 
-        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo)
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo)
         {
             Nome = nome;
             Peso = peso;
@@ -287,7 +287,7 @@ namespace Pokedex.Api.Models
             Codigo = codigo;
         }
 
-        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, string codigo, string imagem)
+        public Pokemon(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string imagem)
         {
             Nome = nome;
             Peso = peso;
