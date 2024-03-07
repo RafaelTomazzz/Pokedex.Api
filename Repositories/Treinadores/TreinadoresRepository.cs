@@ -26,6 +26,12 @@ namespace Pokedex.Api.Repositories
             return treinador;
         }
 
+        public async Task<Treinador> GetByLoginAsync(string login)
+        {
+            Treinador treinador = await _context.Treinadores.FirstOrDefaultAsync(t => t.Login == login);
+            return treinador;
+        }
+
         public async Task<Treinador> GetByLoginTreinadorAsnc(string login)
         {
             Treinador treinador = await _context.Treinadores.FirstOrDefaultAsync(t => t.Login == login);

@@ -4,6 +4,7 @@ using Pokedex.Api.Repositories;
 using Pokedex.Api.Repositories.Interfaces;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Repositories.UnitOfWork;
+using Pokedex.Api.DTO;
 
 
 namespace Pokedex.Api.Services
@@ -85,6 +86,35 @@ namespace Pokedex.Api.Services
             }
 
             await _treinadoresRepository.DeleteTreinadorAsync(id);
+        }
+
+        public async Task<bool> Autenticar(LoginDTO loginDTO)
+        {
+            Treinador treinador = await _treinadoresRepository.GetByLoginTreinadorAsnc(loginDTO.Login);
+
+            if ( treinador.Senha != loginDTO.Senha)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> Existe(LoginDTO loginDTO)
+        {
+            Treinador treinador = await _treinadoresRepository.GetByLoginTreinadorAsnc(loginDTO.Login);
+            
+            if (treinador == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool VerificarSenha(string senhaDigitada, string senha)
+        {
+            return senhaDigitada == senha;
         }
     }
 }

@@ -1,4 +1,6 @@
 using Pokedex.Api.Models;   
+using Pokedex.Api.DTO;
+
 
 namespace Pokedex.Api.Services.Interfaces
 {
@@ -9,5 +11,7 @@ namespace Pokedex.Api.Services.Interfaces
         public Task<Treinador> PostTreinadorAsync(Treinador treinador);
         public Task<Treinador> UpdateTreinadorAsync(int id, Treinador alteracaoTreinador);
         public Task DeleteTreinadorAsync(int id);
+        public Task<bool> Autenticar (LoginDTO loginDTO);
+        public Task<bool> Existe(LoginDTO loginDTO);
     }
 }

@@ -99,6 +99,33 @@ namespace Pokedex.Api.Controllers
             }
         }
 
+        [HttpPost("Autenticar")]
+        public async Task<IActionResult> Autenticar([FromBody] LoginDTO loginDTO)
+        {
+            try
+            {
+                var existe = await _treinadoresService.Existe(loginDTO);
+                if (existe == false)
+                {
+                    return Unauthorized("Este login não existe");
+                }
+
+                var result = await _treinadoresService.Autenticar(loginDTO);
+                if (result == false)
+                {
+                    Unauthorized("Login ou senha inválidos");
+                }
+
+                return Ok(loginDTO);
+        
+            }
+            catch (BaseException ex)
+            {
+                
+                return ex.GetResponse();
+            }
+        }
+
 
 
     }
