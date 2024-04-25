@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tr2xJ0pgIWEhGlxN59v2V94WL2v1cUX2sUv8enedxfT1AUmxcW7SVUOX7lNh78v9n0oSZoM+olE0FoLoPbiFUA==",
+  "dgSpecHash": "YP+VQpE3D7mFtodjOEGOLTvQ0irjRFYT+pWBk1fqrBAFWWL7ju3eL92bJH/kVGlvzYeRpYw+I+R/WOFeOKBNPg==",
   "success": true,
   "projectFilePath": "D:\\pokedex\\Pokedex.Api\\Pokedex.Api.csproj",
   "expectedPackageFiles": [
@@ -82,7 +82,11 @@
     "C:\\Users\\Rafael\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\Rafael\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+    "C:\\Users\\Rafael\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.17\\microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.17\\microsoft.windowsdesktop.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.17\\microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.17\\microsoft.netcore.app.host.win-x64.7.0.17.nupkg.sha512"
   ],
   "logs": []
 }

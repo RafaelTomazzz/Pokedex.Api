@@ -104,16 +104,16 @@ namespace Pokedex.Api.Controllers
         {
             try
             {
-                var existe = await _treinadoresService.Existe(loginDTO);
+                bool existe = await _treinadoresService.Existe(loginDTO);
                 if (existe == false)
                 {
                     return Unauthorized("Este login não existe");
                 }
 
-                var result = await _treinadoresService.Autenticar(loginDTO);
+                bool result = await _treinadoresService.Autenticar(loginDTO);
                 if (result == false)
                 {
-                    Unauthorized("Login ou senha inválidos");
+                    return BadRequest("Login ou senha inválidos");
                 }
 
                 return Ok(loginDTO);
