@@ -49,12 +49,17 @@ namespace Pokedex.Api.Data
                 .HasForeignKey(e => e.IdPokemon)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<PokemonHabilidade>()
+            /*modelBuilder.Entity<PokemonHabilidade>()
                 .HasKey(p => p.IdHabilidade);
 
-                
             modelBuilder.Entity<PokemonHabilidade>()
-                .HasKey(p => p.IdPokemon);
+                .HasKey(p => p.IdPokemon);*/
+
+            modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasOne(e => e.Habilidade)
+                .WithMany(p => p.EvolucaoHabilidades)
+                .HasForeignKey(e => e.IdHabilidade)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<EvolucaoHabilidade>()
                 .HasOne(e => e.Evolucao)
@@ -62,17 +67,12 @@ namespace Pokedex.Api.Data
                 .HasForeignKey(e => e.IdEvolucao)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<EvolucaoHabilidade>()
-                .HasOne(e => e.Evolucao)
-                .WithMany(p => p.EvolucaoHabilidades)
-                .HasForeignKey(e => e.IdHabilidade)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<EvolucaoHabilidade>()
-                .HasKey(p => p.IdEvolucao);
+            /*modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasKey(p => p.IdHabilidade);*/
             
-            modelBuilder.Entity<EvolucaoHabilidade>()
-                .HasKey(p => p.IdHabilidade);
+            /*modelBuilder.Entity<EvolucaoHabilidade>()
+                .HasKey(p => p.IdEvolucao);*/
+            
 
             
             modelBuilder.Entity<Pokemon>().HasData

@@ -7,6 +7,7 @@ using Pokedex.Api.Models.Enuns;
 namespace Pokedex.Api.Models
 {  
     [Table("PokemonHabilidade")]
+    [PrimaryKey(nameof(IdHabilidade), nameof(IdPokemon))]
     public class PokemonHabilidade
     {   
         [Required]
