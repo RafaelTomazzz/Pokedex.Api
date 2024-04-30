@@ -11,7 +11,7 @@ namespace Pokedex.Api.Models
     [Table("Treinador")]
     public class Treinador
     {
-        public ICollection<Pokemon>? Pokemons { get; set; }
+        public ICollection<PokemonTreinador>? PokemonTreinadores { get; set; }
         public ICollection<Item>? Itens { get; set; }
         
         [Key]

@@ -112,7 +112,6 @@ namespace Pokedex.Api.Models
         [Required]
         [NotNull]
         [Column("Descricao")]
-        [StringLength(250)]
         public string Descricao { get; set;}
 
         [Required]

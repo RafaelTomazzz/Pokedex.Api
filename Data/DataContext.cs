@@ -16,14 +16,10 @@ namespace Pokedex.Api.Data
         public DbSet<Habilidade> Habilidades {get; set;}
         public DbSet<PokemonHabilidade> PokemonHabilidades {get; set;}
         public DbSet<EvolucaoHabilidade> EvolucaoHabilidades {get; set;}
+        public DbSet<PokemonTreinador> PokemonTreinadores {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Pokemon>()
-                .HasOne(p => p.Treinador)
-                .WithMany(t => t.Pokemons)
-                .HasForeignKey(p => p.IdTreinador)
-                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<Evolucao>()
                 .HasOne(e => e.Pokemon)
@@ -49,12 +45,6 @@ namespace Pokedex.Api.Data
                 .HasForeignKey(e => e.IdPokemon)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*modelBuilder.Entity<PokemonHabilidade>()
-                .HasKey(p => p.IdHabilidade);
-
-            modelBuilder.Entity<PokemonHabilidade>()
-                .HasKey(p => p.IdPokemon);*/
-
             modelBuilder.Entity<EvolucaoHabilidade>()
                 .HasOne(e => e.Habilidade)
                 .WithMany(p => p.EvolucaoHabilidades)
@@ -67,29 +57,36 @@ namespace Pokedex.Api.Data
                 .HasForeignKey(e => e.IdEvolucao)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*modelBuilder.Entity<EvolucaoHabilidade>()
-                .HasKey(p => p.IdHabilidade);*/
-            
-            /*modelBuilder.Entity<EvolucaoHabilidade>()
-                .HasKey(p => p.IdEvolucao);*/
-            
+            modelBuilder.Entity<PokemonTreinador>()
+                .HasOne(e => e.Pokemon)
+                .WithMany(e => e.PokemonTreinadores)
+                .HasForeignKey(e => e.IdPokemon)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PokemonTreinador>()
+                .HasOne(e => e.Treinador)
+                .WithMany(e => e.PokemonTreinadores)
+                .HasForeignKey(e => e.IdTreinador)
+                .OnDelete(DeleteBehavior.Cascade);
 
             
+           
+           
             modelBuilder.Entity<Pokemon>().HasData
             (
-                new Pokemon() {Id = 1, Nome = "Bulbasaur", Peso = 6.9F, Altura = 0.7F, Codigo = 001, IdTreinador = 1, MinVida = 45, MaxVida  = 290, 
+                new Pokemon() {Id = 1, Nome = "Bulbasaur", Peso = 6.9F, Altura = 0.7F, Codigo = 001, MinVida = 45, MaxVida  = 290, 
                 MinAtaque = 49, MaxAtaque = 216, MinDefesa = 49, MaxDefesa = 216, MinVelocidade = 45, MaxVelocidade = 207, Elemento = Elemento.Grama, 
                 SegundoElemento = SegundoElemento.Veneno , Apanhado = false, 
                 Descricao = "Bulbasaur is a small, mainly turquoise amphibian Pokémon with red eyes and a green bulb on its back. It is based on a frog/toad, with the bulb resembling a plant bulb that grows into a flower as it evolves.", 
                 Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png"},
 
-                new Pokemon() {Id = 2, Nome = "Charmander", Peso = 8.5F, Altura = 0.6F, Codigo = 004, IdTreinador = 1, MinVida = 39, MaxVida  = 282, 
+                new Pokemon() {Id = 2, Nome = "Charmander", Peso = 8.5F, Altura = 0.6F, Codigo = 004, MinVida = 39, MaxVida  = 282, 
                 MinAtaque = 52, MaxAtaque = 223, MinDefesa = 43, MaxDefesa = 203, MinVelocidade = 65, MaxVelocidade = 251, Elemento = Elemento.Fogo, 
                 SegundoElemento = SegundoElemento.Nenhum , Apanhado = false, 
                 Descricao = "Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health.", 
                 Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png"},
 
-                new Pokemon() {Id = 3, Nome = "Squirtle", Peso = 9.0F, Altura = 0.5F, Codigo = 007, IdTreinador = 1, MinVida = 44, MaxVida  = 292, 
+                new Pokemon() {Id = 3, Nome = "Squirtle", Peso = 9.0F, Altura = 0.5F, Codigo = 007, MinVida = 44, MaxVida  = 292, 
                 MinAtaque = 48, MaxAtaque = 214, MinDefesa = 65, MaxDefesa = 251, MinVelocidade = 43, MaxVelocidade = 203, Elemento = Elemento.Agua, 
                 SegundoElemento = SegundoElemento.Nenhum , Apanhado = false, 
                 Descricao = "Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health.", 

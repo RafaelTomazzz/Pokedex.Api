@@ -15,6 +15,7 @@ namespace Pokedex.Api.Models
     {
         public ICollection<Evolucao>? Evolucoes {get; set;}
         public ICollection<PokemonHabilidade>? PokemonHabilidades {get; set; }
+        public ICollection<PokemonTreinador>? PokemonTreinadores {get; set; }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -40,13 +41,6 @@ namespace Pokedex.Api.Models
         [NotNull]
         [Column("Codigo")]
         public int Codigo { get; set;}
-
-        [Required]
-        [NotNull]
-        [ForeignKey("Id_Treinador")]
-        public int IdTreinador { get; set;}
-        [NotMapped]
-        public virtual Treinador? Treinador { get; set;}
 
         [Required]
         [NotNull]
@@ -112,7 +106,6 @@ namespace Pokedex.Api.Models
         [Required]
         [NotNull]
         [Column("Descricao")]
-        [StringLength(250)]
         public string Descricao { get; set;}
 
         [Required]

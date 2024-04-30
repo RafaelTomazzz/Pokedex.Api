@@ -12,8 +12,8 @@ using Pokedex.Api.Data;
 namespace Pokedex.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240430172208_AdicionandoObjetos")]
-    partial class AdicionandoObjetos
+    [Migration("20240430195950_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,8 +48,7 @@ namespace Pokedex.Api.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
                     b.Property<int>("Elemento")
@@ -347,8 +346,7 @@ namespace Pokedex.Api.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
                     b.Property<int>("Elemento")
@@ -480,8 +478,7 @@ namespace Pokedex.Api.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
                     b.Property<int?>("Elemento")
@@ -550,16 +547,12 @@ namespace Pokedex.Api.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
                     b.Property<int>("Elemento")
                         .HasColumnType("int")
                         .HasColumnName("Elemento");
-
-                    b.Property<int>("IdTreinador")
-                        .HasColumnType("int");
 
                     b.Property<string>("Imagem")
                         .IsRequired()
@@ -622,8 +615,6 @@ namespace Pokedex.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdTreinador");
-
                     b.ToTable("Pokemon");
 
                     b.HasData(
@@ -635,7 +626,6 @@ namespace Pokedex.Api.Migrations
                             Codigo = 1,
                             Descricao = "Bulbasaur is a small, mainly turquoise amphibian Pokémon with red eyes and a green bulb on its back. It is based on a frog/toad, with the bulb resembling a plant bulb that grows into a flower as it evolves.",
                             Elemento = 4,
-                            IdTreinador = 1,
                             Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png",
                             MaxAtaque = 216,
                             MaxDefesa = 216,
@@ -657,7 +647,6 @@ namespace Pokedex.Api.Migrations
                             Codigo = 4,
                             Descricao = "Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health.",
                             Elemento = 2,
-                            IdTreinador = 1,
                             Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png",
                             MaxAtaque = 223,
                             MaxDefesa = 203,
@@ -679,7 +668,6 @@ namespace Pokedex.Api.Migrations
                             Codigo = 7,
                             Descricao = "Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health.",
                             Elemento = 3,
-                            IdTreinador = 1,
                             Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/007.png",
                             MaxAtaque = 214,
                             MaxDefesa = 251,
@@ -740,6 +728,21 @@ namespace Pokedex.Api.Migrations
                             IdHabilidade = 8,
                             IdPokemon = 3
                         });
+                });
+
+            modelBuilder.Entity("Pokedex.Api.Models.PokemonTreinador", b =>
+                {
+                    b.Property<int>("IdTreinador")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPokemon")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdTreinador", "IdPokemon");
+
+                    b.HasIndex("IdPokemon");
+
+                    b.ToTable("PokemonTreinador");
                 });
 
             modelBuilder.Entity("Pokedex.Api.Models.Treinador", b =>
@@ -862,17 +865,6 @@ namespace Pokedex.Api.Migrations
                     b.Navigation("Treinador");
                 });
 
-            modelBuilder.Entity("Pokedex.Api.Models.Pokemon", b =>
-                {
-                    b.HasOne("Pokedex.Api.Models.Treinador", "Treinador")
-                        .WithMany("Pokemons")
-                        .HasForeignKey("IdTreinador")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Treinador");
-                });
-
             modelBuilder.Entity("Pokedex.Api.Models.PokemonHabilidade", b =>
                 {
                     b.HasOne("Pokedex.Api.Models.Habilidade", "Habilidade")
@@ -892,6 +884,25 @@ namespace Pokedex.Api.Migrations
                     b.Navigation("Pokemon");
                 });
 
+            modelBuilder.Entity("Pokedex.Api.Models.PokemonTreinador", b =>
+                {
+                    b.HasOne("Pokedex.Api.Models.Pokemon", "Pokemon")
+                        .WithMany("PokemonTreinadores")
+                        .HasForeignKey("IdPokemon")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pokedex.Api.Models.Treinador", "Treinador")
+                        .WithMany("PokemonTreinadores")
+                        .HasForeignKey("IdTreinador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
+
+                    b.Navigation("Treinador");
+                });
+
             modelBuilder.Entity("Pokedex.Api.Models.Evolucao", b =>
                 {
                     b.Navigation("EvolucaoHabilidades");
@@ -909,13 +920,15 @@ namespace Pokedex.Api.Migrations
                     b.Navigation("Evolucoes");
 
                     b.Navigation("PokemonHabilidades");
+
+                    b.Navigation("PokemonTreinadores");
                 });
 
             modelBuilder.Entity("Pokedex.Api.Models.Treinador", b =>
                 {
                     b.Navigation("Itens");
 
-                    b.Navigation("Pokemons");
+                    b.Navigation("PokemonTreinadores");
                 });
 #pragma warning restore 612, 618
         }
