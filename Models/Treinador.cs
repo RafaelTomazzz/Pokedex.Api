@@ -12,7 +12,8 @@ namespace Pokedex.Api.Models
     public class Treinador
     {
         public ICollection<PokemonTreinador>? PokemonTreinadores { get; set; }
-        public ICollection<Item>? Itens { get; set; }
+        public ICollection<EvolucaoTreinador>? EvolucaoTreinadores { get; set; }
+        public ICollection<ItemTreinador>? ItemTreinadores { get; set; }
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

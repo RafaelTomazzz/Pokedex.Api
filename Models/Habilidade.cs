@@ -13,7 +13,6 @@ namespace Pokedex.Api.Models
     public class Habilidade
     {
         public ICollection<PokemonHabilidade>? PokemonHabilidades {get; set; }
-
         public ICollection<EvolucaoHabilidade>? EvolucaoHabilidades {get; set; }
 
         [Key]

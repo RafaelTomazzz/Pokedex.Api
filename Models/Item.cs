@@ -12,6 +12,8 @@ namespace Pokedex.Api.Models
     [Table("Item")]
     public class Item
     {
+        public ICollection<ItemTreinador>? ItemTreinadores { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set;}
@@ -21,13 +23,6 @@ namespace Pokedex.Api.Models
         [Column("Nome")]
         [StringLength(20)]
         public string Nome { get; set;}
-
-        [Required]
-        [NotNull]
-        [ForeignKey("IdTreinador")]
-        public int IdTreinador { get; set;}
-        [NotMapped]
-        public virtual Treinador? Treinador { get; set;}
 
         [Required]
         [NotNull]

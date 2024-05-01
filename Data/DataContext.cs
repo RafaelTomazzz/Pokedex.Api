@@ -17,6 +17,8 @@ namespace Pokedex.Api.Data
         public DbSet<PokemonHabilidade> PokemonHabilidades {get; set;}
         public DbSet<EvolucaoHabilidade> EvolucaoHabilidades {get; set;}
         public DbSet<PokemonTreinador> PokemonTreinadores {get; set;}
+        public DbSet<EvolucaoTreinador> EvolucaoTreinadores {get; set;}
+        public DbSet<ItemTreinador> ItemTreinadores {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,12 +27,6 @@ namespace Pokedex.Api.Data
                 .HasOne(e => e.Pokemon)
                 .WithMany(p => p.Evolucoes)
                 .HasForeignKey(e => e.IdPokemon)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Item>()
-                .HasOne(e => e.Treinador)
-                .WithMany(p => p.Itens)
-                .HasForeignKey(e => e.IdTreinador)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PokemonHabilidade>()
@@ -66,6 +62,30 @@ namespace Pokedex.Api.Data
             modelBuilder.Entity<PokemonTreinador>()
                 .HasOne(e => e.Treinador)
                 .WithMany(e => e.PokemonTreinadores)
+                .HasForeignKey(e => e.IdTreinador)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EvolucaoTreinador>()
+                .HasOne(e => e.Evolucao)
+                .WithMany(e => e.EvolucaoTreinadores)
+                .HasForeignKey(e => e.IdEvolucao)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EvolucaoTreinador>()
+                .HasOne(e => e.Treinador)
+                .WithMany(e => e.EvolucaoTreinadores)
+                .HasForeignKey(e => e.IdTreinador)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ItemTreinador>()
+                .HasOne(e => e.Item)
+                .WithMany(e => e.ItemTreinadores)
+                .HasForeignKey(e => e.IdItem)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            modelBuilder.Entity<ItemTreinador>()
+                .HasOne(e => e.Treinador)
+                .WithMany(e => e.ItemTreinadores)
                 .HasForeignKey(e => e.IdTreinador)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -137,13 +157,38 @@ namespace Pokedex.Api.Data
                 new Treinador() {Id = 1, PNome = "Rafael", SNome = "Tomaz", DtNascimento = new DateTime(2006, 01, 27), Login = "Rafael", Senha = "senha"},
                 new Treinador() {Id = 2, PNome = "Kayne", SNome = "West", DtNascimento = new DateTime(1977, 06, 08), Login = "Ye", Senha = "senha"},
                 new Treinador() {Id = 3, PNome = "Shark", SNome = "Boy", DtNascimento = new DateTime(2014, 09, 12), Login = "SharkBoy", Senha = "senha"},
-                new Treinador() {Id= 4, PNome = "Lava", SNome = "Girl", DtNascimento = new DateTime(2014, 04, 02), Login = "LavaGirl", Senha= "senha"}
+                new Treinador() {Id = 4, PNome = "Lava", SNome = "Girl", DtNascimento = new DateTime(2014, 04, 02), Login = "LavaGirl", Senha= "senha"}
+            );
+
+            modelBuilder.Entity<PokemonTreinador>().HasData
+            (
+                new PokemonTreinador() {IdPokemon = 2, IdTreinador = 1},
+                new PokemonTreinador() {IdPokemon = 1, IdTreinador = 2},
+                new PokemonTreinador() {IdPokemon = 3, IdTreinador = 3},
+                new PokemonTreinador() {IdPokemon = 2, IdTreinador = 4}
+            );
+
+            modelBuilder.Entity<EvolucaoTreinador>().HasData
+            (
+                new EvolucaoTreinador() {IdEvolucao = 1, IdTreinador = 2},
+                new EvolucaoTreinador() {IdEvolucao = 5, IdTreinador = 3},
+                new EvolucaoTreinador() {IdEvolucao = 3, IdTreinador = 4},
+                new EvolucaoTreinador() {IdEvolucao = 3, IdTreinador = 1},
+                new EvolucaoTreinador() {IdEvolucao = 4, IdTreinador = 1}
             );
 
             modelBuilder.Entity<Item>().HasData
             (
-                new Item() {Id = 1, Nome = "Potion", IdTreinador = 1, PtVida = 20, PtAtaque = 0, PtDefesa = 0, 
+                new Item() {Id = 1, Nome = "Potion", PtVida = 20, PtAtaque = 0, PtDefesa = 0, 
                 Descricao = "Restaura 20 pontos de vida", Elemento = null }
+            );
+
+            modelBuilder.Entity<ItemTreinador>().HasData
+            (
+                new ItemTreinador() {IdItem = 1, IdTreinador = 1},
+                new ItemTreinador() {IdItem = 1, IdTreinador = 2},
+                new ItemTreinador() {IdItem = 1, IdTreinador = 3},
+                new ItemTreinador() {IdItem = 1, IdTreinador = 4}
             );
 
             modelBuilder.Entity<Habilidade>().HasData

@@ -13,6 +13,7 @@ namespace Pokedex.Api.Models
     public class Evolucao
     {
         public ICollection<EvolucaoHabilidade>? EvolucaoHabilidades {get; set; }
+        public ICollection<EvolucaoTreinador>? EvolucaoTreinadores {get; set; }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

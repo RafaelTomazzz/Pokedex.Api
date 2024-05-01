@@ -333,6 +333,48 @@ namespace Pokedex.Api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Pokedex.Api.Models.EvolucaoTreinador", b =>
+                {
+                    b.Property<int>("IdEvolucao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTreinador")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdEvolucao", "IdTreinador");
+
+                    b.HasIndex("IdTreinador");
+
+                    b.ToTable("EvolucaoTreinador");
+
+                    b.HasData(
+                        new
+                        {
+                            IdEvolucao = 1,
+                            IdTreinador = 2
+                        },
+                        new
+                        {
+                            IdEvolucao = 5,
+                            IdTreinador = 3
+                        },
+                        new
+                        {
+                            IdEvolucao = 3,
+                            IdTreinador = 4
+                        },
+                        new
+                        {
+                            IdEvolucao = 3,
+                            IdTreinador = 1
+                        },
+                        new
+                        {
+                            IdEvolucao = 4,
+                            IdTreinador = 1
+                        });
+                });
+
             modelBuilder.Entity("Pokedex.Api.Models.Habilidade", b =>
                 {
                     b.Property<int>("Id")
@@ -482,9 +524,6 @@ namespace Pokedex.Api.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Elemento");
 
-                    b.Property<int>("IdTreinador")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -505,8 +544,6 @@ namespace Pokedex.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdTreinador");
-
                     b.ToTable("Item");
 
                     b.HasData(
@@ -514,11 +551,47 @@ namespace Pokedex.Api.Migrations
                         {
                             Id = 1,
                             Descricao = "Restaura 20 pontos de vida",
-                            IdTreinador = 1,
                             Nome = "Potion",
                             PtAtaque = 0,
                             PtDefesa = 0,
                             PtVida = 20
+                        });
+                });
+
+            modelBuilder.Entity("Pokedex.Api.Models.ItemTreinador", b =>
+                {
+                    b.Property<int>("IdItem")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTreinador")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdItem", "IdTreinador");
+
+                    b.HasIndex("IdTreinador");
+
+                    b.ToTable("ItemTreinador");
+
+                    b.HasData(
+                        new
+                        {
+                            IdItem = 1,
+                            IdTreinador = 1
+                        },
+                        new
+                        {
+                            IdItem = 1,
+                            IdTreinador = 2
+                        },
+                        new
+                        {
+                            IdItem = 1,
+                            IdTreinador = 3
+                        },
+                        new
+                        {
+                            IdItem = 1,
+                            IdTreinador = 4
                         });
                 });
 
@@ -740,6 +813,28 @@ namespace Pokedex.Api.Migrations
                     b.HasIndex("IdPokemon");
 
                     b.ToTable("PokemonTreinador");
+
+                    b.HasData(
+                        new
+                        {
+                            IdTreinador = 1,
+                            IdPokemon = 2
+                        },
+                        new
+                        {
+                            IdTreinador = 2,
+                            IdPokemon = 1
+                        },
+                        new
+                        {
+                            IdTreinador = 3,
+                            IdPokemon = 3
+                        },
+                        new
+                        {
+                            IdTreinador = 4,
+                            IdPokemon = 2
+                        });
                 });
 
             modelBuilder.Entity("Pokedex.Api.Models.Treinador", b =>
@@ -851,13 +946,40 @@ namespace Pokedex.Api.Migrations
                     b.Navigation("Habilidade");
                 });
 
-            modelBuilder.Entity("Pokedex.Api.Models.Item", b =>
+            modelBuilder.Entity("Pokedex.Api.Models.EvolucaoTreinador", b =>
                 {
+                    b.HasOne("Pokedex.Api.Models.Evolucao", "Evolucao")
+                        .WithMany("EvolucaoTreinadores")
+                        .HasForeignKey("IdEvolucao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Pokedex.Api.Models.Treinador", "Treinador")
-                        .WithMany("Itens")
+                        .WithMany("EvolucaoTreinadores")
                         .HasForeignKey("IdTreinador")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Evolucao");
+
+                    b.Navigation("Treinador");
+                });
+
+            modelBuilder.Entity("Pokedex.Api.Models.ItemTreinador", b =>
+                {
+                    b.HasOne("Pokedex.Api.Models.Item", "Item")
+                        .WithMany("ItemTreinadores")
+                        .HasForeignKey("IdItem")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pokedex.Api.Models.Treinador", "Treinador")
+                        .WithMany("ItemTreinadores")
+                        .HasForeignKey("IdTreinador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
 
                     b.Navigation("Treinador");
                 });
@@ -903,6 +1025,8 @@ namespace Pokedex.Api.Migrations
             modelBuilder.Entity("Pokedex.Api.Models.Evolucao", b =>
                 {
                     b.Navigation("EvolucaoHabilidades");
+
+                    b.Navigation("EvolucaoTreinadores");
                 });
 
             modelBuilder.Entity("Pokedex.Api.Models.Habilidade", b =>
@@ -910,6 +1034,11 @@ namespace Pokedex.Api.Migrations
                     b.Navigation("EvolucaoHabilidades");
 
                     b.Navigation("PokemonHabilidades");
+                });
+
+            modelBuilder.Entity("Pokedex.Api.Models.Item", b =>
+                {
+                    b.Navigation("ItemTreinadores");
                 });
 
             modelBuilder.Entity("Pokedex.Api.Models.Pokemon", b =>
@@ -923,7 +1052,9 @@ namespace Pokedex.Api.Migrations
 
             modelBuilder.Entity("Pokedex.Api.Models.Treinador", b =>
                 {
-                    b.Navigation("Itens");
+                    b.Navigation("EvolucaoTreinadores");
+
+                    b.Navigation("ItemTreinadores");
 
                     b.Navigation("PokemonTreinadores");
                 });

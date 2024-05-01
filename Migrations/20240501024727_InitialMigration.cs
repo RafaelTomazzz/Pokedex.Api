@@ -32,6 +32,24 @@ namespace Pokedex.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Pontos_Vida = table.Column<int>(type: "int", nullable: false),
+                    Pontos_Defesa = table.Column<int>(type: "int", nullable: false),
+                    Pontos_Ataque = table.Column<int>(type: "int", nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Elemento = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pokemon",
                 columns: table => new
                 {
@@ -138,24 +156,23 @@ namespace Pokedex.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
+                name: "ItemTreinador",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    IdTreinador = table.Column<int>(type: "int", nullable: false),
-                    Pontos_Vida = table.Column<int>(type: "int", nullable: false),
-                    Pontos_Defesa = table.Column<int>(type: "int", nullable: false),
-                    Pontos_Ataque = table.Column<int>(type: "int", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Elemento = table.Column<int>(type: "int", nullable: true)
+                    IdItem = table.Column<int>(type: "int", nullable: false),
+                    IdTreinador = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.PrimaryKey("PK_ItemTreinador", x => new { x.IdItem, x.IdTreinador });
                     table.ForeignKey(
-                        name: "FK_Item_Treinador_IdTreinador",
+                        name: "FK_ItemTreinador_Item_IdItem",
+                        column: x => x.IdItem,
+                        principalTable: "Item",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemTreinador_Treinador_IdTreinador",
                         column: x => x.IdTreinador,
                         principalTable: "Treinador",
                         principalColumn: "Id",
@@ -210,6 +227,30 @@ namespace Pokedex.Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EvolucaoTreinador",
+                columns: table => new
+                {
+                    IdEvolucao = table.Column<int>(type: "int", nullable: false),
+                    IdTreinador = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EvolucaoTreinador", x => new { x.IdEvolucao, x.IdTreinador });
+                    table.ForeignKey(
+                        name: "FK_EvolucaoTreinador_Evolucao_IdEvolucao",
+                        column: x => x.IdEvolucao,
+                        principalTable: "Evolucao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EvolucaoTreinador_Treinador_IdTreinador",
+                        column: x => x.IdTreinador,
+                        principalTable: "Treinador",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Habilidade",
                 columns: new[] { "Id", "Descricao", "Elemento", "Nome_Habilidade", "Power", "Pontos_Power", "Pontos_Precisao" },
@@ -225,6 +266,11 @@ namespace Pokedex.Api.Migrations
                     { 8, "The foe is struck with a lot of water expelled forcibly from the mouth.", 3, "Water Gun", 40, 25, 100 },
                     { 9, "The user attacks the foe with a pulsing blast of water. It may also confuse the foe.", 3, "Water Pulse", 60, 20, 100 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Item",
+                columns: new[] { "Id", "Descricao", "Elemento", "Nome", "Pontos_Ataque", "Pontos_Defesa", "Pontos_Vida" },
+                values: new object[] { 1, "Restaura 20 pontos de vida", null, "Potion", 0, 0, 20 });
 
             migrationBuilder.InsertData(
                 table: "Pokemon",
@@ -261,9 +307,15 @@ namespace Pokedex.Api.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Item",
-                columns: new[] { "Id", "Descricao", "Elemento", "IdTreinador", "Nome", "Pontos_Ataque", "Pontos_Defesa", "Pontos_Vida" },
-                values: new object[] { 1, "Restaura 20 pontos de vida", null, 1, "Potion", 0, 0, 20 });
+                table: "ItemTreinador",
+                columns: new[] { "IdItem", "IdTreinador" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 1, 4 }
+                });
 
             migrationBuilder.InsertData(
                 table: "PokemonHabilidade",
@@ -276,6 +328,17 @@ namespace Pokedex.Api.Migrations
                     { 4, 2 },
                     { 5, 2 },
                     { 8, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PokemonTreinador",
+                columns: new[] { "IdPokemon", "IdTreinador" },
+                values: new object[,]
+                {
+                    { 2, 1 },
+                    { 1, 2 },
+                    { 3, 3 },
+                    { 2, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -297,6 +360,18 @@ namespace Pokedex.Api.Migrations
                     { 6, 9 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "EvolucaoTreinador",
+                columns: new[] { "IdEvolucao", "IdTreinador" },
+                values: new object[,]
+                {
+                    { 1, 2 },
+                    { 3, 1 },
+                    { 3, 4 },
+                    { 4, 1 },
+                    { 5, 3 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Evolucao_IdPokemon",
                 table: "Evolucao",
@@ -308,8 +383,13 @@ namespace Pokedex.Api.Migrations
                 column: "IdEvolucao");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_IdTreinador",
-                table: "Item",
+                name: "IX_EvolucaoTreinador_IdTreinador",
+                table: "EvolucaoTreinador",
+                column: "IdTreinador");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemTreinador_IdTreinador",
+                table: "ItemTreinador",
                 column: "IdTreinador");
 
             migrationBuilder.CreateIndex(
@@ -330,7 +410,10 @@ namespace Pokedex.Api.Migrations
                 name: "EvolucaoHabilidade");
 
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "EvolucaoTreinador");
+
+            migrationBuilder.DropTable(
+                name: "ItemTreinador");
 
             migrationBuilder.DropTable(
                 name: "PokemonHabilidade");
@@ -340,6 +423,9 @@ namespace Pokedex.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Evolucao");
+
+            migrationBuilder.DropTable(
+                name: "Item");
 
             migrationBuilder.DropTable(
                 name: "Habilidade");
