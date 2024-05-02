@@ -42,6 +42,10 @@ builder.Services.AddScoped<ITreinadoresService, TreinadoresService>();
 builder.Services.AddScoped<IPokemonTreinadoresRepository, PokemonTreinadoresRepository>();
 builder.Services.AddScoped<IPokemonTreinadoresService, PokemonTreinadoresService>();
 
+builder.Services.AddScoped<IEvolucaoTreinadoresRepository, EvolucaoTreinadoresRepository>();
+builder.Services.AddScoped<IEvolucaoTreinadoresService, EvolucaoTreinadoresService>();
+
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllers();
