@@ -110,13 +110,15 @@ namespace Pokedex.Api.Controllers
                     return Unauthorized("Este login não existe");
                 }
 
-                bool result = await _treinadoresService.Autenticar(loginDTO);
-                if (result == false)
+                bool verificarSenha = await _treinadoresService.VerificarSenha(loginDTO);
+                if(verificarSenha == false)
                 {
-                    return BadRequest("Login ou senha inválidos");
+                    return Unauthorized("A senha esta incorreta");
                 }
 
-                return Ok(loginDTO);
+                var token = await _treinadoresService.GenerateToken(loginDTO);
+
+                return Ok(token);
         
             }
             catch (BaseException ex)

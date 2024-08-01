@@ -5,6 +5,10 @@ using Pokedex.Api.Repositories.Interfaces;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Repositories.UnitOfWork;
 using Pokedex.Api.DTO;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Claims;
 
 
 namespace Pokedex.Api.Services
@@ -112,9 +116,39 @@ namespace Pokedex.Api.Services
             return true;
         }
 
-        private bool VerificarSenha(string senhaDigitada, string senha)
+        public async Task<bool> VerificarSenha(LoginDTO loginDTO)
         {
-            return senhaDigitada == senha;
+            Treinador treinador = await _treinadoresRepository.GetByLoginTreinadorAsnc(loginDTO.Login);
+
+            if(loginDTO.Senha == treinador.Senha)
+            {
+                return true;
+            }
+            
+            return false;
+        }
+
+        public async Task<string> GenerateToken(LoginDTO loginDTO)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            
+            var TokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim []
+                {
+                    new Claim(ClaimTypes.Name, loginDTO.Login.ToString()),
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature
+                )
+
+            };
+
+            var token = tokenHandler.CreateToken(TokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

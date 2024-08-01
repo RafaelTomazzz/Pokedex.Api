@@ -13,5 +13,7 @@ namespace Pokedex.Api.Services.Interfaces
         public Task DeleteTreinadorAsync(int id);
         public Task<bool> Autenticar (LoginDTO loginDTO);
         public Task<bool> Existe(LoginDTO loginDTO);
+        public  Task<string> GenerateToken(LoginDTO loginDTO);
+        public Task<bool> VerificarSenha(LoginDTO loginDTO);
     }
 }
