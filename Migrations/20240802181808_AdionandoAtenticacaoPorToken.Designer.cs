@@ -12,8 +12,8 @@ using Pokedex.Api.Data;
 namespace Pokedex.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240501024727_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240802181808_AdionandoAtenticacaoPorToken")]
+    partial class AdionandoAtenticacaoPorToken
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
