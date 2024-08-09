@@ -43,5 +43,10 @@ namespace Pokedex.Api.Repositories
             _context.Remove(evolucao);
         }
 
+        public async Task<List<Evolucao>> GetByIdPokemonEvolucao(int idpokemon)
+        {
+            List<Evolucao> evolucoes = await _context.Evolucoes.Where(ev => ev.IdPokemon == idpokemon).ToListAsync();
+            return evolucoes;
+        }
     }
 }

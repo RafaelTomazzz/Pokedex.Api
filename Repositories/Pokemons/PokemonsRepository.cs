@@ -37,5 +37,7 @@ namespace Pokedex.Api.Repositories
             Pokemon pokemon = await _context.Pokemons.FirstOrDefaultAsync(p => p.Id == id);
             _context.Pokemons.Remove(pokemon);
         }
+
+
     }
 }

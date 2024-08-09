@@ -24,8 +24,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 IEnumerable<Evolucao> evolucoes = await _evolucoesService.GetAllEvolucaoAsync();
-                IEnumerable<EvolucaoDTO> evolucoesDTO = evolucoes.Select(e => e.ToEvolucao());
-                return Ok(evolucoesDTO);
+                IEnumerable<PokemonDTO> pokemonsDTO = evolucoes.Select(e => e.ToPokemon());
+                return Ok(pokemonsDTO);
             }
             catch (BaseException ex)
             {
@@ -40,8 +40,8 @@ namespace Pokedex.Api.Controllers
             try
             {
                 Evolucao evolucao = await _evolucoesService.GetByIdAsync(id);
-                EvolucaoDTO evolucaoDTO = evolucao.ToEvolucao();
-                return Ok(evolucaoDTO);
+                PokemonDTO pokemonDTO = evolucao.ToPokemon();
+                return Ok(pokemonDTO);
             }
             catch (BaseException ex)
             {

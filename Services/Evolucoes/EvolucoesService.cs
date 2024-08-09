@@ -85,7 +85,6 @@ namespace Pokedex.Api.Services
             evolucao.MaxDefesa = alteracaoEvolucao.MaxDefesa;
             evolucao.MinVelocidade = alteracaoEvolucao.MinVelocidade;
             evolucao.MaxVelocidade = alteracaoEvolucao.MaxVelocidade;
-            evolucao.Apanhado = alteracaoEvolucao.Apanhado;
             evolucao.Codigo = alteracaoEvolucao.Codigo;
             evolucao.Descricao = alteracaoEvolucao.Descricao;
             await _unitOfWork.SaveChangesAsync();

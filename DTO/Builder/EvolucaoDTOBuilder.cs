@@ -92,12 +92,6 @@ namespace Pokedex.Api.DTO.Builder
             return this;
         }
 
-        public EvolucaoDTOBuilder WithApanhado(bool apanhado)
-        {
-            _evolucaoDTO.Apanhado = apanhado;
-            return this;
-        }
-
         public EvolucaoDTOBuilder WithImagem(string imagem)
         {
             _evolucaoDTO.Imagem = imagem;

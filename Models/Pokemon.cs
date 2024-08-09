@@ -100,11 +100,6 @@ namespace Pokedex.Api.Models
 
         [Required]
         [NotNull]
-        [Column("Apanhado")]
-        public bool Apanhado { get; set;} = false;
-
-        [Required]
-        [NotNull]
         [Column("Descricao")]
         public string Descricao { get; set;}
 

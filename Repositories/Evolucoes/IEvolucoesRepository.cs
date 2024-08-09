@@ -9,5 +9,6 @@ namespace Pokedex.Api.Repositories.Interfaces
         public Task PostEvolucaoAsync(Evolucao evolucao);
         public Task<Evolucao> GetByNomeEvolucaoAsync(string nome);
         public Task DeleteEvolucaoAsync(Evolucao evolucao);
+        public Task<List<Evolucao>> GetByIdPokemonEvolucao(int idpokemon);
     }
 }

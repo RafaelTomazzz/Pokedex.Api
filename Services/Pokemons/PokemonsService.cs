@@ -4,18 +4,21 @@ using Pokedex.Api.Models;
 using Pokedex.Api.Exceptions;
 using Pokedex.Api.Repositories.UnitOfWork;
 using Pokedex.Api.Repositories.Interfaces;
+using Pokedex.Api.DTO;
 
 namespace Pokedex.Api.Services
 {
     public class PokemonsService : IPokemonsService
     {
+        private readonly IEvolucoesRepository _evolucaoRepository;
         private readonly IPokemonsRepository _pokemonsRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PokemonsService(IPokemonsRepository pokemonsRepository, IUnitOfWork unitOfWork)
+        public PokemonsService(IPokemonsRepository pokemonsRepository, IUnitOfWork unitOfWork, IEvolucoesRepository evolucoesRepository)
         {
             _pokemonsRepository = pokemonsRepository;
             _unitOfWork = unitOfWork;
+            _evolucaoRepository = evolucoesRepository;
         }
 
         public async Task<IEnumerable<Pokemon>> GetAllPokemonAsync()
@@ -90,7 +93,6 @@ namespace Pokedex.Api.Services
             pokemon.SegundoElemento = alteracaoPokemon.SegundoElemento;
             pokemon.Descricao = alteracaoPokemon.Descricao;
             pokemon.Codigo = alteracaoPokemon.Codigo;
-            pokemon.Apanhado = alteracaoPokemon.Apanhado;
             pokemon.Imagem = alteracaoPokemon.Imagem;
             await _unitOfWork.SaveChangesAsync();
 
@@ -106,6 +108,30 @@ namespace Pokedex.Api.Services
             }
 
             await _pokemonsRepository.DeletePokemonAsync(id);
+        }
+
+        public async Task<List<PokemonDTO>> GetAllPokemonEvolucao()
+        {
+            List<PokemonDTO> pokemonDTOs = new List<PokemonDTO>();
+
+            IEnumerable<Pokemon> pokemons = await _pokemonsRepository.GetAllPokemonAsync();
+
+            foreach(Pokemon pokemon in pokemons)
+            {
+                PokemonDTO pokemonDTO = pokemon.ToPokemon();
+                pokemonDTOs.Add(pokemonDTO);
+                
+                List<Evolucao> evolucoes = await _evolucaoRepository.GetByIdPokemonEvolucao(pokemon.Id);
+
+                foreach (Evolucao evolucao in evolucoes)
+                {
+                    PokemonDTO evolucaoDTO = evolucao.ToPokemon();
+                    pokemonDTOs.Add(evolucaoDTO);
+                }
+
+            }
+
+            return pokemonDTOs;
         }
     }
 }

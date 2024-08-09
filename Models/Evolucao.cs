@@ -107,11 +107,6 @@ namespace Pokedex.Api.Models
 
         [Required]
         [NotNull]
-        [Column("Apanhado")]
-        public bool Apanhado { get; set;} = false;
-
-        [Required]
-        [NotNull]
         [Column("Descricao")]
         public string Descricao { get; set;}
 
@@ -305,7 +300,7 @@ namespace Pokedex.Api.Models
             Descricao = descricao;
         }
 
-        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string descricao, bool apanhado)
+        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string descricao, string imagem)
         {
             Nome = nome;
             Peso = peso;
@@ -322,33 +317,12 @@ namespace Pokedex.Api.Models
             SegundoElemento = segundoElemento;
             Codigo = codigo;
             Descricao = descricao;
-            Apanhado = apanhado;
-        }
-
-        public Evolucao(string nome, float peso, float altura, int minVida, int maxVida, int minAtaque, int maxAtaque, int minDefesa, int maxDefesa, int minVelocidade, int maxVelocidade, Elemento elemento, SegundoElemento segundoElemento, int codigo, string descricao, bool apanhado, string imagem)
-        {
-            Nome = nome;
-            Peso = peso;
-            Altura = altura;
-            MinVida = minVida;
-            MaxVida = maxVida;
-            MinAtaque = minAtaque;
-            MaxAtaque = maxAtaque;
-            MinDefesa = minDefesa;
-            MaxDefesa = maxDefesa;
-            MinVelocidade = minVelocidade;
-            MaxVelocidade = maxVelocidade;
-            Elemento = elemento;
-            SegundoElemento = segundoElemento;
-            Codigo = codigo;
-            Descricao = descricao;
-            Apanhado = apanhado;
             Imagem = imagem;
         }
 
-        public EvolucaoDTO ToEvolucao()
+        public PokemonDTO ToPokemon()
         {
-            EvolucaoDTO evolucaoDTO = new EvolucaoDTOBuilder()
+            PokemonDTO pokemonDTO = new PokemonDTOBuilder()
                 .WithNome(Nome)
                 .WithPeso(Peso)
                 .WithAltura(Altura)
@@ -364,11 +338,10 @@ namespace Pokedex.Api.Models
                 .WithElemento(Elemento)
                 .WithSegundoElemento(SegundoElemento)
                 .WithDescricao(Descricao)
-                .WithApanhado(Apanhado)
                 .WithImagem(Imagem)
-                .Build();
+                .Builder();
 
-            return evolucaoDTO;
+            return pokemonDTO;
         }
 
 
