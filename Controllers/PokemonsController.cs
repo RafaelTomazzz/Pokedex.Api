@@ -50,6 +50,36 @@ namespace Pokedex.Api.Controllers
             }
         }
 
+        [HttpGet("GetPokemonByName/{nome}")]
+        public async Task<IActionResult> GetPokemonByName(string nome)
+        {
+            try
+            {
+                List<PokemonDTO> pokemon = await _pokemonsService.GetPokemonByName(nome);
+                return Ok(pokemon);
+            }
+            catch (BaseException ex)
+            {
+
+                return ex.GetResponse();
+            }
+        }
+
+        [HttpGet("GetPokemonEvolucaoByName/{nome}")]
+        public async Task<IActionResult> GetPokemonEvolucaoByName(string nome)
+        {
+            try
+            {
+                IEnumerable<PokemonDTO> pokemonDTOs = await _pokemonsService.GetPokemonEvolucaoByNameAsync(nome);
+                return Ok(pokemonDTOs);
+            }
+            catch (BaseException ex)
+            {
+
+                return ex.GetResponse();
+            }
+        }
+
         [HttpGet("GetAllSemDTO")]
         public async Task<IActionResult> GetAllAsyncSemDTO()
         {

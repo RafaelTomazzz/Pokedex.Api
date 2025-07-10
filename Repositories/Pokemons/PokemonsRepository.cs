@@ -13,7 +13,7 @@ namespace Pokedex.Api.Repositories
         public PokemonsRepository(DataContext context)
         {
             _context = context;
-        } 
+        }
 
         public async Task<IEnumerable<Pokemon>> GetAllPokemonAsync()
         {
@@ -38,6 +38,11 @@ namespace Pokedex.Api.Repositories
             _context.Pokemons.Remove(pokemon);
         }
 
+        public async Task<Pokemon> GetPokemonByNameAsync(string nome)
+        {
+            Pokemon pokemon = await _context.Pokemons.FirstOrDefaultAsync(p => p.Nome == nome);
+            return pokemon;
+        }
 
     }
 }

@@ -24,8 +24,8 @@ namespace Pokedex.Api.Services
         public async Task<IEnumerable<Pokemon>> GetAllPokemonAsync()
         {
             IEnumerable<Pokemon> pokemons = await _pokemonsRepository.GetAllPokemonAsync();
-            
-            if(pokemons is null)
+
+            if (pokemons is null)
             {
                 throw new NotFoundException("Não existe nenhum pokemon");
             }
@@ -37,7 +37,7 @@ namespace Pokedex.Api.Services
         {
             Pokemon pokemon = await _pokemonsRepository.GetByIdPokemonAsync(id);
 
-            if(pokemon is null)
+            if (pokemon is null)
             {
                 throw new NotFoundException("Não existe nenhum pokemon com este id");
             }
@@ -47,19 +47,19 @@ namespace Pokedex.Api.Services
 
         public async Task<Pokemon> PostPokemonAsync(Pokemon pokemon)
         {
-            if(pokemon.MinVida <= 10 | pokemon.MinVida <= 0)
+            if (pokemon.MinVida <= 10 | pokemon.MinVida <= 0)
             {
                 throw new Exception("O HP do pokemon não pode ser menor ou igual que 10");
             }
-            else if(pokemon.MinDefesa <= 10 | pokemon.MinDefesa <= 10)
+            else if (pokemon.MinDefesa <= 10 | pokemon.MinDefesa <= 10)
             {
                 throw new Exception("A defesa do pokemon não pode ser menor ou igual que 10");
             }
-            else if(pokemon.MinAtaque <= 10 | pokemon.MinAtaque <= 10)
+            else if (pokemon.MinAtaque <= 10 | pokemon.MinAtaque <= 10)
             {
                 throw new Exception("O ataque do pokemon não pode ser menor ou igual que 10");
             }
-            else if(pokemon.MinVelocidade <= 10 | pokemon.MinVelocidade <= 10)
+            else if (pokemon.MinVelocidade <= 10 | pokemon.MinVelocidade <= 10)
             {
                 throw new Exception("A velocidade do pokemon não pode ser menor ou igual que 10");
             }
@@ -73,7 +73,7 @@ namespace Pokedex.Api.Services
         {
             Pokemon pokemon = await _pokemonsRepository.GetByIdPokemonAsync(id);
 
-            if(pokemon is null)
+            if (pokemon is null)
             {
                 throw new NotFoundException("Este pokemon não existe");
             }
@@ -82,7 +82,7 @@ namespace Pokedex.Api.Services
             pokemon.Peso = alteracaoPokemon.Peso;
             pokemon.Altura = alteracaoPokemon.Altura;
             pokemon.MinVida = alteracaoPokemon.MinVida;
-            pokemon.MaxVida= alteracaoPokemon.MaxVida;
+            pokemon.MaxVida = alteracaoPokemon.MaxVida;
             pokemon.MinAtaque = alteracaoPokemon.MinAtaque;
             pokemon.MaxAtaque = alteracaoPokemon.MaxAtaque;
             pokemon.MinDefesa = alteracaoPokemon.MinDefesa;
@@ -102,7 +102,7 @@ namespace Pokedex.Api.Services
         public async Task DeletePokemonAsync(int id)
         {
             Pokemon pokemon = await _pokemonsRepository.GetByIdPokemonAsync(id);
-            if(pokemon is null)
+            if (pokemon is null)
             {
                 throw new NotFoundException("Este pokemon não existe");
             }
@@ -116,11 +116,11 @@ namespace Pokedex.Api.Services
 
             IEnumerable<Pokemon> pokemons = await _pokemonsRepository.GetAllPokemonAsync();
 
-            foreach(Pokemon pokemon in pokemons)
+            foreach (Pokemon pokemon in pokemons)
             {
                 PokemonDTO pokemonDTO = pokemon.ToPokemon();
                 pokemonDTOs.Add(pokemonDTO);
-                
+
                 List<Evolucao> evolucoes = await _evolucaoRepository.GetByIdPokemonEvolucao(pokemon.Id);
 
                 foreach (Evolucao evolucao in evolucoes)
@@ -129,6 +129,45 @@ namespace Pokedex.Api.Services
                     pokemonDTOs.Add(evolucaoDTO);
                 }
 
+            }
+
+            return pokemonDTOs;
+        }
+
+        public async Task<List<PokemonDTO>> GetPokemonByName(string nome)
+        {
+            Pokemon pokemon = await _pokemonsRepository.GetPokemonByNameAsync(nome);
+            PokemonDTO pokemonDTO = pokemon.ToPokemon();
+            List<PokemonDTO> pokemonDTOs = new List<PokemonDTO>();
+            pokemonDTOs.Add(pokemonDTO);
+
+            if (pokemon == null)
+            {
+                throw new NotFoundException("Não existe um pokemon com este nome");
+            }
+
+            return pokemonDTOs;
+        }
+
+        public async Task<List<PokemonDTO>> GetPokemonEvolucaoByNameAsync(string nome)
+        {
+            List<PokemonDTO> pokemonDTOs = new List<PokemonDTO>();
+            Pokemon pokemon = await _pokemonsRepository.GetPokemonByNameAsync(nome);
+
+            if (pokemon == null)
+            {
+                throw new NotFoundException("Não existe um pokemon com este nome");
+            }
+
+            PokemonDTO pokemonDTO = pokemon.ToPokemon();
+            pokemonDTOs.Add(pokemonDTO);
+
+            List<Evolucao> evolucoes = await _evolucaoRepository.GetByIdPokemonEvolucao(pokemon.Id);
+
+            foreach (Evolucao evolucao in evolucoes)
+            {
+                PokemonDTO evolucaoDTO = evolucao.ToPokemon();
+                pokemonDTOs.Add(evolucaoDTO);   
             }
 
             return pokemonDTOs;

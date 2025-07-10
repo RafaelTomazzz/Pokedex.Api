@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoSomee"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalRafael"));
 });
 
 builder.Services.AddScoped<IEvolucoesRepository, EvolucoesRepository>();
@@ -56,7 +56,17 @@ builder.Services.AddScoped<IItemTreinadoresService, ItemTreinadoresService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Policy",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddControllers();
 
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -92,7 +102,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors();
+app.UseCors("Policy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

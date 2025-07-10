@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pokedex.Api.Data;
 
@@ -11,9 +12,11 @@ using Pokedex.Api.Data;
 namespace Pokedex.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250527060843_NaoSei")]
+    partial class NaoSei
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,90 +287,6 @@ namespace Pokedex.Api.Migrations
                             MinVida = 60,
                             Nome = "Butterfree",
                             Peso = 32f,
-                            SegundoElemento = 5
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Altura = 0.6f,
-                            Codigo = 14,
-                            Descricao = "Almost incapable of moving, this POKéMON can only harden its shell to protect itself from predators.",
-                            Elemento = 13,
-                            IdPokemon = 5,
-                            Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/014.png",
-                            MaxAtaque = 163,
-                            MaxDefesa = 218,
-                            MaxVelocidade = 67,
-                            MaxVida = 294,
-                            MinAtaque = 25,
-                            MinDefesa = 50,
-                            MinVelocidade = 35,
-                            MinVida = 45,
-                            Nome = "Kakuna",
-                            Peso = 10f,
-                            SegundoElemento = 7
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Altura = 1f,
-                            Codigo = 15,
-                            Descricao = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail.",
-                            Elemento = 13,
-                            IdPokemon = 5,
-                            Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/015.png",
-                            MaxAtaque = 306,
-                            MaxDefesa = 196,
-                            MaxVelocidade = 273,
-                            MaxVida = 334,
-                            MinAtaque = 90,
-                            MinDefesa = 50,
-                            MinVelocidade = 75,
-                            MinVida = 65,
-                            Nome = "Beedrill",
-                            Peso = 29.5f,
-                            SegundoElemento = 7
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Altura = 1.1f,
-                            Codigo = 17,
-                            Descricao = "Very protective of its sprawling territorial area, this POKéMON will fiercely peck at any intruder.",
-                            Elemento = 1,
-                            IdPokemon = 6,
-                            Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/017.png",
-                            MaxAtaque = 240,
-                            MaxDefesa = 229,
-                            MaxVelocidade = 218,
-                            MaxVida = 330,
-                            MinAtaque = 60,
-                            MinDefesa = 55,
-                            MinVelocidade = 71,
-                            MinVida = 63,
-                            Nome = "Pidgeotto",
-                            Peso = 30f,
-                            SegundoElemento = 5
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Altura = 1.5f,
-                            Codigo = 18,
-                            Descricao = "When hunting, it skims the surface of water at high speed to pick off unwary prey such as MAGIKARP.",
-                            Elemento = 1,
-                            IdPokemon = 6,
-                            Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/018.png",
-                            MaxAtaque = 284,
-                            MaxDefesa = 273,
-                            MaxVelocidade = 331,
-                            MaxVida = 370,
-                            MinAtaque = 80,
-                            MinDefesa = 75,
-                            MinVelocidade = 101,
-                            MinVida = 83,
-                            Nome = "Pidgeot",
-                            Peso = 39.5f,
                             SegundoElemento = 5
                         });
                 });
@@ -879,46 +798,6 @@ namespace Pokedex.Api.Migrations
                             Nome = "Caterpie",
                             Peso = 2.9f,
                             SegundoElemento = 0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Altura = 0.3f,
-                            Codigo = 13,
-                            Descricao = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head.",
-                            Elemento = 13,
-                            Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/013.png",
-                            MaxAtaque = 185,
-                            MaxDefesa = 174,
-                            MaxVelocidade = 218,
-                            MaxVida = 284,
-                            MinAtaque = 35,
-                            MinDefesa = 30,
-                            MinVelocidade = 50,
-                            MinVida = 40,
-                            Nome = "Weedle",
-                            Peso = 3.2f,
-                            SegundoElemento = 7
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Altura = 0.3f,
-                            Codigo = 16,
-                            Descricao = "A common sight in forests and woods. It flaps its wings at ground level to kick up blinding sand.",
-                            Elemento = 1,
-                            Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png",
-                            MaxAtaque = 207,
-                            MaxDefesa = 196,
-                            MaxVelocidade = 232,
-                            MaxVida = 284,
-                            MinAtaque = 45,
-                            MinDefesa = 40,
-                            MinVelocidade = 56,
-                            MinVida = 40,
-                            Nome = "Pidgey",
-                            Peso = 1.8f,
-                            SegundoElemento = 5
                         });
                 });
 

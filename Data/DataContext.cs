@@ -110,7 +110,26 @@ namespace Pokedex.Api.Data
                 MinAtaque = 48, MaxAtaque = 214, MinDefesa = 65, MaxDefesa = 251, MinVelocidade = 43, MaxVelocidade = 203, Elemento = Elemento.Agua, 
                 SegundoElemento = SegundoElemento.Nenhum ,
                 Descricao = "Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health.", 
-                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/007.png"}
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/007.png"},
+
+                new Pokemon() {Id = 4, Nome = "Caterpie", Peso = 2.9F, Altura = 0.3F, Codigo = 010, MinVida = 45, MaxVida = 294,
+                MinAtaque = 30, MaxAtaque = 174, MinDefesa = 35, MaxDefesa = 185, MinVelocidade = 45, MaxVelocidade = 207, Elemento = Elemento.Inseto,
+                SegundoElemento = SegundoElemento.Nenhum,
+                Descricao = "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls.",
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/010.png"},
+
+                new Pokemon() {Id = 5, Nome = "Weedle", Peso = 3.2F, Altura = 0.3F, Codigo = 013, MinVida = 40, MaxVida = 284,
+                MinAtaque = 35, MaxAtaque = 185, MinDefesa = 30, MaxDefesa = 174, MinVelocidade = 50, MaxVelocidade = 218, Elemento = Elemento.Inseto,
+                SegundoElemento = SegundoElemento.Veneno,
+                Descricao = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head.",
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/013.png"},
+
+                new Pokemon() {Id = 6, Nome = "Pidgey", Peso = 1.8F, Altura = 0.3F, Codigo = 016, MinVida = 40, MaxVida = 284,
+                MinAtaque = 45, MaxAtaque = 207, MinDefesa = 40, MaxDefesa = 196, MinVelocidade = 56, MaxVelocidade = 232, Elemento = Elemento.Normal,
+                SegundoElemento = SegundoElemento.Voador,
+                Descricao = "A common sight in forests and woods. It flaps its wings at ground level to kick up blinding sand.",
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png"}
+
             );
 
             modelBuilder.Entity<Evolucao>().HasData
@@ -149,7 +168,43 @@ namespace Pokedex.Api.Data
                 MinAtaque = 83, MaxAtaque = 291, MinDefesa = 100, MaxDefesa = 328, MinVelocidade = 78, MaxVelocidade = 280, Elemento = Elemento.Agua, 
                 SegundoElemento = SegundoElemento.Nenhum , 
                 Descricao = "Blastoise is a large, bipedal, reptilian Pokémon. It has a blue body with small purple eyes, a light brown belly, and a stubby tail. It has a large brown shell with two powerful water cannons on either side, which can be withdrawn.", 
-                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/009.png"}                
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/009.png"},
+
+                new Evolucao() {Id = 7, IdPokemon = 4, Nome = "Metapod", Peso = 9.9F, Altura = 0.7F, Codigo = 011, MinVida = 50, MaxVida  = 304, 
+                MinAtaque = 20, MaxAtaque = 152, MinDefesa = 55, MaxDefesa = 229, MinVelocidade = 30, MaxVelocidade = 174, Elemento = Elemento.Inseto, 
+                SegundoElemento = SegundoElemento.Nenhum,
+                Descricao = "This POKéMON is vulnerable to attack while its shell is soft, exposing its weak and tender body.", 
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/011.png"},
+
+                new Evolucao() {Id = 8, IdPokemon = 4, Nome = "Butterfree", Peso = 32F, Altura = 1.1F, Codigo = 012, MinVida = 60, MaxVida = 324, 
+                MinAtaque = 45, MaxAtaque = 207, MinDefesa = 50, MaxDefesa = 218, MinVelocidade = 70, MaxVelocidade = 262, Elemento = Elemento.Inseto, 
+                SegundoElemento = SegundoElemento.Voador,
+                Descricao = "In battle, it flaps its wings at high speed to release highly toxic dust into the air.", 
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/012.png"},
+
+                new Evolucao() {Id = 9, IdPokemon = 5, Nome = "Kakuna", Peso = 10F, Altura = 0.6F, Codigo = 014, MinVida = 45, MaxVida  = 294, 
+                MinAtaque = 25, MaxAtaque = 163, MinDefesa = 50, MaxDefesa = 218, MinVelocidade = 35, MaxVelocidade = 67, Elemento = Elemento.Inseto, 
+                SegundoElemento = SegundoElemento.Veneno,
+                Descricao = "Almost incapable of moving, this POKéMON can only harden its shell to protect itself from predators.", 
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/014.png"},
+
+                new Evolucao() {Id = 10, IdPokemon = 5, Nome = "Beedrill", Peso = 29.5F, Altura = 1F, Codigo = 015, MinVida = 65, MaxVida  = 334, 
+                MinAtaque = 90, MaxAtaque = 306, MinDefesa = 50, MaxDefesa = 196, MinVelocidade = 75, MaxVelocidade = 273, Elemento = Elemento.Inseto, 
+                SegundoElemento = SegundoElemento.Veneno,
+                Descricao = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail.", 
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/015.png"},
+
+                new Evolucao() {Id = 11, IdPokemon = 6, Nome = "Pidgeotto", Peso = 30F, Altura = 1.1F, Codigo = 017, MinVida = 63, MaxVida  = 330, 
+                MinAtaque = 60, MaxAtaque = 240, MinDefesa = 55, MaxDefesa = 229, MinVelocidade = 71, MaxVelocidade = 218, Elemento = Elemento.Normal, 
+                SegundoElemento = SegundoElemento.Voador,
+                Descricao = "Very protective of its sprawling territorial area, this POKéMON will fiercely peck at any intruder.", 
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/017.png"},
+
+                new Evolucao() {Id = 12, IdPokemon = 6, Nome = "Pidgeot", Peso = 39.5F, Altura = 1.5F, Codigo = 018, MinVida = 83, MaxVida = 370, 
+                MinAtaque = 80, MaxAtaque = 284, MinDefesa = 75, MaxDefesa = 273, MinVelocidade = 101, MaxVelocidade = 331, Elemento = Elemento.Normal, 
+                SegundoElemento = SegundoElemento.Voador,
+                Descricao = "When hunting, it skims the surface of water at high speed to pick off unwary prey such as MAGIKARP.", 
+                Imagem = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/018.png"}
             );
 
             modelBuilder.Entity<Treinador>().HasData

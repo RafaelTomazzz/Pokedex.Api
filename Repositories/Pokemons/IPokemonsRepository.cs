@@ -8,5 +8,6 @@ namespace Pokedex.Api.Repositories.Interfaces
         public Task<Pokemon> GetByIdPokemonAsync(int id);
         public Task PostPokemonAsync(Pokemon pokemon);
         public Task DeletePokemonAsync(int id);
+        public Task<Pokemon> GetPokemonByNameAsync(string nome);
     }
 }
