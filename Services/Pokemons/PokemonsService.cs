@@ -136,15 +136,27 @@ namespace Pokedex.Api.Services
 
         public async Task<List<PokemonDTO>> GetPokemonByName(string nome)
         {
-            Pokemon pokemon = await _pokemonsRepository.GetPokemonByNameAsync(nome);
-            PokemonDTO pokemonDTO = pokemon.ToPokemon();
+            PokemonDTO pokemonDTO = new PokemonDTO();
             List<PokemonDTO> pokemonDTOs = new List<PokemonDTO>();
-            pokemonDTOs.Add(pokemonDTO);
 
-            if (pokemon == null)
+            Pokemon pokemon = await _pokemonsRepository.GetPokemonByNameAsync(nome);
+
+            if (pokemon != null)
             {
-                throw new NotFoundException("Não existe um pokemon com este nome");
+                pokemonDTO = pokemon.ToPokemon();
             }
+            else
+            {
+                Evolucao evolucao = await _evolucaoRepository.GetByNomeEvolucaoAsync(nome);
+                pokemonDTO = evolucao.ToPokemon();
+
+                if (evolucao == null)
+                {
+                    throw new NotFoundException("Não existe um pokemon com este nome");
+                }
+            }
+
+            pokemonDTOs.Add(pokemonDTO);
 
             return pokemonDTOs;
         }
@@ -154,20 +166,31 @@ namespace Pokedex.Api.Services
             List<PokemonDTO> pokemonDTOs = new List<PokemonDTO>();
             Pokemon pokemon = await _pokemonsRepository.GetPokemonByNameAsync(nome);
 
-            if (pokemon == null)
+            PokemonDTO pokemonDTO = new PokemonDTO();
+
+            if (pokemon != null)
             {
-                throw new NotFoundException("Não existe um pokemon com este nome");
-            }
+                pokemonDTO = pokemon.ToPokemon();
+                pokemonDTOs.Add(pokemonDTO);
 
-            PokemonDTO pokemonDTO = pokemon.ToPokemon();
-            pokemonDTOs.Add(pokemonDTO);
+                List<Evolucao> evolucoes = await _evolucaoRepository.GetByIdPokemonEvolucao(pokemon.Id);
 
-            List<Evolucao> evolucoes = await _evolucaoRepository.GetByIdPokemonEvolucao(pokemon.Id);
-
-            foreach (Evolucao evolucao in evolucoes)
+                foreach (Evolucao evolucao in evolucoes)
+                {
+                    PokemonDTO evolucaoDTO = evolucao.ToPokemon();
+                    pokemonDTOs.Add(evolucaoDTO);   
+                }
+            } else
             {
-                PokemonDTO evolucaoDTO = evolucao.ToPokemon();
-                pokemonDTOs.Add(evolucaoDTO);   
+                Evolucao evolucao = await _evolucaoRepository.GetByNomeEvolucaoAsync(nome);
+                pokemonDTO = evolucao.ToPokemon();
+
+                pokemonDTOs.Add(pokemonDTO);
+
+                if (evolucao == null)
+                {
+                    throw new NotFoundException("Não existe um pokemon com este nome");
+                }
             }
 
             return pokemonDTOs;
