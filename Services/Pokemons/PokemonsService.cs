@@ -160,6 +160,29 @@ namespace Pokedex.Api.Services
 
             return pokemonDTOs;
         }
+        
+        public async Task<PokemonDTO> GetPokemonByNameCard(string nome)
+        {
+            PokemonDTO pokemonDTO = new PokemonDTO();
+            Pokemon pokemon = await _pokemonsRepository.GetPokemonByNameAsync(nome);
+
+            if (pokemon != null)
+            {
+                pokemonDTO = pokemon.ToPokemon();
+            }
+            else
+            {
+                Evolucao evolucao = await _evolucaoRepository.GetByNomeEvolucaoAsync(nome);
+                pokemonDTO = evolucao.ToPokemon();
+
+                if (evolucao == null)
+                {
+                    throw new NotFoundException("Não existe um pokemon com este nome");
+                }
+            }
+
+            return pokemonDTO;
+        }
 
         public async Task<List<PokemonDTO>> GetPokemonEvolucaoByNameAsync(string nome)
         {
@@ -178,9 +201,10 @@ namespace Pokedex.Api.Services
                 foreach (Evolucao evolucao in evolucoes)
                 {
                     PokemonDTO evolucaoDTO = evolucao.ToPokemon();
-                    pokemonDTOs.Add(evolucaoDTO);   
+                    pokemonDTOs.Add(evolucaoDTO);
                 }
-            } else
+            }
+            else
             {
                 Evolucao evolucao = await _evolucaoRepository.GetByNomeEvolucaoAsync(nome);
                 pokemonDTO = evolucao.ToPokemon();

@@ -12,6 +12,7 @@ namespace Pokedex.Api.Services.Interfaces
         public Task DeletePokemonAsync(int id);
         public Task<List<PokemonDTO>> GetAllPokemonEvolucao();
         public Task<List<PokemonDTO>> GetPokemonByName(string nome);
+        public Task<PokemonDTO> GetPokemonByNameCard(string nome);
         public Task<List<PokemonDTO>> GetPokemonEvolucaoByNameAsync(string nome);
     }
 }
